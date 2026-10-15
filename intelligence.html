@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#07111e" />
+  <meta name="description" content="TerraPulse historical geospatial data science: real USGS dataset, DBSCAN earthquake clusters and unusual-activity analysis." />
+  <title>TerraPulse · Data Intelligence</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="intelligence.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+  <script src="intelligence.js" defer></script>
+</head>
+<body data-theme="dark">
+  <div class="site-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="brand" href="index.html#overview" aria-label="TerraPulse home">
+        <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="2"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="currentColor" stroke-width="1.7" transform="rotate(-35 20 20)"/><circle cx="32.3" cy="10.8" r="3.3" fill="#52E6D0"/></svg></span>
+        <span><strong>TerraPulse</strong><small>EARTH INTELLIGENCE</small></span>
+      </a>
+      <div class="sidebar-section"><div class="nav-label" id="workspaceText">WORKSPACE</div>
+        <nav class="nav-list" aria-label="TerraPulse sections">
+          <a class="nav-link" href="index.html#overview"><span class="ni">◫</span><span data-key="overview">Overview</span></a>
+          <a class="nav-link" href="index.html#explorer"><span class="ni">◎</span><span data-key="explorer">Live Explorer</span></a>
+          <a class="nav-link" href="index.html#analytics"><span class="ni">⌁</span><span data-key="analytics">Analytics</span></a>
+          <a class="nav-link active" href="intelligence.html" aria-current="page"><span class="ni">✧</span><span data-key="intelligence">Data Intelligence</span></a>
+          <a class="nav-link" href="index.html#compare"><span class="ni">▤</span><span data-key="compare">Compare</span></a>
+          <a class="nav-link" href="index.html#reports"><span class="ni">▣</span><span data-key="reports">Reports</span></a>
+        </nav>
+      </div>
+      <div class="sidebar-bottom"><div class="status-panel"><span class="status-line"><span class="live-dot"></span><span data-key="catalog">USGS historical catalog</span></span><small data-key="notPredictions">Observed data, not earthquake forecasts.</small></div>
+        <a class="source-link" href="https://earthquake.usgs.gov/fdsnws/event/1/" target="_blank" rel="noopener noreferrer"><span class="ni">↗</span><span data-key="source">Data source</span></a>
+      </div>
+    </aside>
+    <div class="content-shell">
+      <header class="topbar"><div class="topbar-left"><button id="menuToggle" class="icon-button mobile-menu" aria-label="Toggle navigation" aria-expanded="false" type="button">☰</button><div class="breadcrumb"><a href="index.html#overview" data-key="platform">Platform</a><span class="breadcrumb-sep">/</span><span data-key="intelligence">Data Intelligence</span></div></div>
+        <div class="topbar-right"><span class="topbar-live"><span class="live-dot"></span>USGS</span><button class="header-control" id="languageToggle" type="button" aria-label="Change language">عربي</button><button class="icon-button" id="themeToggle" type="button" aria-label="Change theme">☼</button></div>
+      </header>
+      <main class="main intel-main">
+        <div class="intel-heading"><div><div class="eyebrow" data-key="eyebrow">GEOSPATIAL DATA SCIENCE</div><h1 data-key="title">Data Intelligence</h1><p class="intro-sub" data-key="intro">Explore historical earthquake data, geographic clusters and activity benchmarks built with Python.</p></div><span class="intel-version">PYTHON · PANDAS · DBSCAN</span></div>
+        <div class="intel-banner"><div class="intel-banner-orb">✧</div><div><strong data-key="heroTitle">From raw observations to explainable insights</strong><p data-key="heroText">Every figure comes from USGS records. No synthetic events, predicted earthquakes or fabricated alerts.</p></div><a class="intel-outline" href="https://github.com/noormoria/TerraPulse/blob/main/scripts/build_intelligence.py" target="_blank" rel="noopener noreferrer"><span data-key="seeCode">View Python pipeline</span> ↗</a></div>
+        <div id="status" class="intel-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span data-key="loading">Loading real historical analysis…</span></div>
+        <div id="intelData" hidden>
+          <div class="intel-meta"><div id="rangeLabel"></div><div id="updatedLabel"></div></div>
+          <section class="intel-metrics" id="statCards" aria-label="Historical earthquake statistics"></section>
+          <section class="intel-grid">
+            <article class="intel-card"><div class="intel-card-head"><div><h2 data-key="trendTitle">30-day activity trend</h2><p data-key="trendDesc">Recorded M4.5+ earthquakes per complete UTC day</p></div><span class="mini-tag">EDA</span></div><div class="intel-chart"><canvas id="dailyChart" role="img" aria-label="Daily earthquake counts"></canvas></div></article>
+            <article class="intel-card"><div class="intel-card-head"><div><h2 data-key="distTitle">Magnitude distribution</h2><p data-key="distDesc">Distribution within the 365-day catalog</p></div><span class="mini-tag">PANDAS</span></div><div class="intel-chart"><canvas id="magnitudeChart" role="img" aria-label="Magnitude distribution"></canvas></div></article>
+          </section>
+          <section class="intel-grid">
+            <article class="intel-card"><div class="intel-card-head"><div><h2 data-key="clustersTitle">Geographic clusters</h2><p data-key="clustersDesc">DBSCAN · geographic distance · not a hazard prediction</p></div><span class="mini-tag">ML</span></div><div class="cluster-plot"><canvas id="clusterChart" role="img" aria-label="Longitude latitude positions of DBSCAN clusters"></canvas></div><p class="method-note" data-key="scatterNote">Each marker shows the approximate geographic center of a cluster; marker size represents the number of observed earthquakes.</p></article>
+            <article class="intel-card"><div class="intel-card-head"><div><h2 data-key="topClusters">Largest observed groups</h2><p data-key="topClustersDesc">Select a group to highlight its location</p></div><span class="mini-tag">DBSCAN</span></div><div id="clusterList" class="intel-hotspots"></div></article>
+          </section>
+          <section class="intel-grid intel-last">
+            <article class="intel-card"><div class="intel-card-head"><div><h2 data-key="benchmarkTitle">Unusual activity benchmark</h2><p data-key="benchmarkDesc">Recent 7 full days vs the preceding 52 complete weeks</p></div><span class="mini-tag">STATISTICS</span></div><div id="benchmarkPanel"></div><div class="intel-chart short"><canvas id="weeklyChart" role="img" aria-label="Historical weekly earthquake counts"></canvas></div></article>
+            <article class="intel-card"><div class="intel-card-head"><div><h2 data-key="methodTitle">Transparent methodology</h2><p data-key="methodDesc">What was calculated and what it does not mean</p></div><span class="mini-tag">REPRODUCIBLE</span></div><div class="intel-method"><div><span data-key="datasetLabel">Dataset</span><strong>USGS FDSN Earthquake Catalog · M4.5+</strong></div><div><span data-key="cleanupLabel">Preprocessing</span><strong data-key="cleanup">Missing-value checks, duplicate IDs and coordinate validation</strong></div><div><span data-key="algoLabel">Clustering</span><strong>DBSCAN · Haversine · 160 km · min_samples=6</strong></div><div><span data-key="anomalyLabel">Activity comparison</span><strong data-key="anomalyMethod">7-day count vs historical 90th percentile (52 weeks)</strong></div></div><p class="method-disclaimer" data-key="caution">Clusters are historical concentrations, not predictions. Above-baseline activity is a descriptive comparison, not a safety warning.</p></article>
+          </section>
+          <div class="intel-downloads"><a href="data/earthquakes_historical.csv" download class="intel-action"><span data-key="getDataset">Download historical dataset (CSV)</span> ↧</a><a href="data/insights.json" download class="intel-outline"><span data-key="getAnalysis">Download analysis (JSON)</span> ↧</a></div>
+        </div>
+      </main>
+      <footer class="footer"><span>TerraPulse · USGS</span><span data-key="footer">Independent educational data science project</span></footer>
+    </div>
+  </div>
+  <div class="mobile-scrim" id="mobileScrim" hidden></div>
+</body>
+</html>
