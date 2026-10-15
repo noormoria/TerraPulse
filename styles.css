@@ -18,3 +18,13 @@ body[data-theme='light']{--background:#f3f8fb;--sidebar:#fff;--surface:#fff;--su
   .toolbar .search-wrap{grid-column:1/-1;width:100%}
   .toolbar .icon-button{flex-shrink:0}
 }
+
+/* Live sunlight layer: readable overlays, flat earthquake location markers. */
+.globe-sun-note{position:absolute;top:50px;left:22px;display:flex;align-items:center;gap:7px;padding:7px 10px;color:#c5e9f7;background:#09263acc;border:1px solid #396078;border-radius:8px;font-size:10px;pointer-events:none;z-index:2;max-width:calc(100% - 44px)}
+.globe-sun-note .ico{height:14px;width:14px;color:#fbd38d;flex:none}
+.quake-legend{position:absolute;bottom:69px;left:22px;display:flex;align-items:center;gap:11px;flex-wrap:wrap;z-index:2;pointer-events:none;color:#e1f4fc;font-size:10px;background:#09263ad9;border:1px solid #396078;border-radius:8px;padding:9px 11px;max-width:calc(100% - 44px)}
+.quake-legend-title{color:#bed7e6;font-weight:700;flex-basis:100%}
+.quake-level{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.quake-dot{width:9px;height:9px;display:inline-block;border-radius:50%;box-shadow:0 0 0 2px #ffffff26}
+.quake-dot.mild{background:#53dec9}.quake-dot.medium{background:#ffbc82}.quake-dot.strong{background:#f58c98}
+@media(max-width:620px){.hero-globe{opacity:.96}.globe-sun-note{top:55px;left:14px}.quake-legend{left:14px;bottom:76px;gap:9px}.globe-control-hint{left:14px;right:14px;font-size:10px;bottom:16px;text-align:center}}
