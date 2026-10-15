@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+<defs>
+ <radialGradient id="ocean" cx="31%" cy="29%" r="75%"><stop stop-color="#23698b"/><stop offset=".4" stop-color="#0d3656"/><stop offset=".78" stop-color="#07192d"/><stop offset="1" stop-color="#020916"/></radialGradient>
+ <radialGradient id="halo"><stop offset="55%" stop-color="#4bcddd" stop-opacity=".21"/><stop offset="1" stop-color="#4bcddd" stop-opacity="0"/></radialGradient>
+ <linearGradient id="land" x1=".2" y1=".1" x2=".9" y2=".8"><stop stop-color="#3a8c97"/><stop offset=".45" stop-color="#1b6579"/><stop offset="1" stop-color="#0b344c"/></linearGradient>
+ <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b8f8ec" stop-opacity=".45"/><stop offset=".45" stop-color="#6be3ec" stop-opacity=".04"/><stop offset="1" stop-color="#121b35" stop-opacity=".7"/></linearGradient>
+ <clipPath id="sphere"><circle cx="300" cy="300" r="252"/></clipPath>
+</defs>
+<circle cx="300" cy="300" r="297" fill="url(#halo)"/>
+<circle cx="300" cy="300" r="253" fill="url(#ocean)" stroke="#2a7797" stroke-width="1"/>
+<g clip-path="url(#sphere)">
+<!-- Decorative, stylized continents: this is not a geographic coordinate map. -->
+<g fill="url(#land)" stroke="#3ea0a9" stroke-opacity=".3" stroke-width="1.5">
+ <path d="M42 177 91 151 112 125 153 114 171 95 213 89 239 107 221 139 198 156 191 180 161 193 147 224 119 231 118 257 103 276 79 251 62 218Z"/>
+ <path d="M143 285 178 294 205 322 218 363 237 384 229 415 204 451 193 500 174 536 156 493 147 453 131 426 129 392 111 356 122 314Z"/>
+ <path d="M261 165 283 145 302 147 325 137 342 148 360 137 383 143 405 127 449 144 492 136 529 159 557 196 548 236 527 258 490 265 463 245 425 258 401 245 372 267 349 246 336 225 308 215 284 224 265 205Z"/>
+ <path d="M289 248 323 228 348 242 371 278 385 315 373 363 349 396 326 442 305 427 287 379 265 344 264 288Z"/>
+ <path d="M406 270 437 271 456 289 469 324 457 337 434 326 414 301Z"/>
+ <path d="M460 390 491 372 520 379 548 414 530 444 493 450 468 436Z"/>
+ <path d="M246 155 255 143 265 157 258 175Z"/>
+ <path d="M377 164 394 151 405 164 393 184Z"/>
+</g>
+<g stroke="#79eddb" stroke-opacity=".13" fill="none"><ellipse cx="300" cy="300" rx="134" ry="252"/><ellipse cx="300" cy="300" rx="217" ry="252"/><path d="M47 300h506M79 216h442M79 384h442M154 120h292M154 480h292"/></g>
+<g fill="#a5fff0"><circle cx="318" cy="191" r="3" opacity=".96"/><circle cx="348" cy="235" r="2.4" opacity=".8"/><circle cx="401" cy="211" r="3.2" opacity=".92"/><circle cx="466" cy="201" r="2" opacity=".65"/><circle cx="305" cy="270" r="2.7" opacity=".95"/><circle cx="192" cy="178" r="2.9" opacity=".8"/><circle cx="176" cy="340" r="2.4" opacity=".72"/><circle cx="511" cy="412" r="2.4" opacity=".7"/></g>
+<circle cx="300" cy="300" r="252" fill="url(#shine)"/>
+</g>
+<circle cx="300" cy="300" r="253" fill="none" stroke="#59cadd" stroke-opacity=".4"/>
+<ellipse cx="300" cy="300" rx="277" ry="95" fill="none" stroke="#6deae4" stroke-opacity=".22" stroke-width="1" transform="rotate(-21 300 300)"/>
+</svg>
