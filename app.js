@@ -204,6 +204,8 @@
     document.querySelectorAll('[data-nav]').forEach(el=>{el.classList.toggle('active',el.dataset.nav===state.page);if(el.classList.contains('nav-link')){el.setAttribute('aria-current',el.dataset.nav===state.page?'page':'false');}});
     document.querySelectorAll('.nav-link').forEach(el=>el.style.direction=state.lang==='ar'?'rtl':'ltr');
     document.querySelector('.status-line .live-dot').style.background=state.error?'#ed8998':'#46deb6';
+    const intelligenceNav=document.getElementById('dataIntelligenceNav');
+    if(intelligenceNav) intelligenceNav.textContent=state.lang==='ar'?'ذكاء البيانات':'Data Intelligence';
     iconHTML();
   }
   function sectionIntro(page) {return `<div class="page-intro"><div class="${state.lang==='ar'?'text-rtl':''}"><div class="eyebrow">${x(t(page+'Eyebrow'))}</div><h1 class="page-title">${x(t(page+'Title'))}</h1><p class="page-subtitle">${x(t(page+'Desc'))}</p></div>${page==='overview'?`<span class="tag">${icon(state.error?'alert':'activity')} ${x(t(state.error?'dataUnavailable':'liveTag'))}</span>`:''}</div>`;}
