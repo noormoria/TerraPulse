@@ -76,3 +76,29 @@ Earthquake data provided by the United States Geological Survey (USGS).
 3D globe: [Globe.gl](https://globe.gl/). Charts: [Chart.js](https://www.chartjs.org/).
 
 The platform is an independent portfolio project, not an official USGS service.
+
+
+## Data Intelligence (real historical data science)
+
+Open [Data Intelligence](https://noormoria.github.io/TerraPulse/intelligence.html) from the website sidebar.
+
+This separate workspace goes beyond live visualization:
+
+- **Dataset:** The USGS [FDSN Earthquake Catalog](https://earthquake.usgs.gov/fdsnws/event/1/) for global earthquakes of magnitude **M4.5+** over the previous **365 complete UTC days**.
+- **Preprocessing:** Python / pandas type validation, missing-value handling, duplicate event-ID removal and coordinate checking.
+- **Exploratory data analysis:** daily activity trend, magnitude distribution, total events, mean/maximum magnitude, median depth.
+- **Machine learning:** scikit-learn **DBSCAN** geographic clustering using **haversine distance** on latitude/longitude (radius 160 km; min_samples=6). Clusters describe historical spatial concentration only.
+- **Unusual activity benchmark:** count for the last 7 complete days compared with the 90th percentile of the preceding **52 complete 7-day windows**. This is descriptive statistics, **not** an earthquake prediction or hazard warning.
+- **Reproducibility:** [scripts/build_intelligence.py](scripts/build_intelligence.py) produces [data/earthquakes_historical.csv](data/earthquakes_historical.csv) and [data/insights.json](data/insights.json).
+- **Automation:** [.github/workflows/update-intelligence.yml](.github/workflows/update-intelligence.yml) runs daily, tests analysis, refreshes real data, then commits the new outputs if changed. The first dataset is populated by a successful GitHub Actions run.
+
+To reproduce locally:
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python scripts/build_intelligence.py
+```
+
+**Limitations:** The USGS catalog can be updated retrospectively. An observed high event count or a DBSCAN group is not an indicator of earthquake imminence or local safety. Historical data analysis is separate from the live USGS feed.
+
