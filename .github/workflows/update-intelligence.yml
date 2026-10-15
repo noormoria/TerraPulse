@@ -26,17 +26,26 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Build real-data analysis
         run: python scripts/build_intelligence.py
-      - name: Commit updated insights only if changed
+      - name: Publish real USGS insights safely to main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Advance to the newest remote head without discarding generated data files.
-          git fetch origin main
-          git reset --mixed origin/main
-          git add data/insights.json data/earthquakes_historical.csv
-          if git diff --cached --quiet; then
-            echo "No changes to publish"
-          else
+          # Contributors may push while the workflow is running.
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --mixed origin/main
+            git add data/insights.json data/earthquakes_historical.csv
+            if git diff --cached --quiet; then
+              echo "Already up to date"
+              exit 0
+            fi
             git commit -m "Update USGS earthquake historical insights"
-            git push
-          fi
+            if git push origin HEAD:main; then
+              echo "Data published"
+              exit 0
+            fi
+            echo "Remote changed during publishing (attempt $attempt); retrying"
+            sleep 3
+          done
+          echo "Could not publish USGS results after retries" >&2
+          exit 1
