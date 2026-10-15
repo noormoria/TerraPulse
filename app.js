@@ -57,6 +57,7 @@
       noEvents:'No earthquakes matched the selected filters.',noEventsShort:'No matching events',timeUnknown:'Time not available',magnitude:'Magnitude',depth:'Depth',
       latitude:'Latitude',longitude:'Longitude',reportedAt:'Reported time',place:'Location',details:'Event details',selectEvent:'Select an event on the globe or in the list to view its details.',
       globeHint:'Drag to rotate · Scroll to zoom · Select a point',globeStatus:'USGS · EARTHQUAKE EVENTS',recentActivity:'Recent activity',
+      earthTime:'Actual sunlight · synced to UTC',quakeDots:'Dots show reported earthquakes',quakeMild:'M2.5–3.9',quakeMedium:'M4–4.9',quakeStrong:'M5+',
       globeUnavailable:'3D globe unavailable. The event data remains accessible below.',eventWebsite:'Open USGS record',
       magDistribution:'Magnitude distribution',magDistributionDesc:'Frequency by magnitude interval',dailyCounts:'Activity by time',dailyCountsDesc:'Reported earthquakes per time interval',
       noAnalytics:'Charts need data from the USGS feed.',importantNote:'These are observed reports, not a prediction or warning system. Counts reflect the time window and minimum magnitude selected.',
@@ -97,6 +98,7 @@
       noEvents:'لا توجد زلازل مطابقة للفلاتر المحددة.',noEventsShort:'لا توجد أحداث مطابقة',timeUnknown:'الوقت غير متاح',magnitude:'القوة',depth:'العمق',
       latitude:'خط العرض',longitude:'خط الطول',reportedAt:'وقت التسجيل',place:'الموقع',details:'تفاصيل الحدث',selectEvent:'اختاري زلزالًا من الكرة الأرضية أو القائمة لعرض التفاصيل.',
       globeHint:'اسحبي للتدوير · مرّري للتقريب · اضغطي على نقطة',globeStatus:'USGS · الزلازل المسجلة',recentActivity:'النشاط الحديث',
+      earthTime:'ضوء الشمس الحقيقي · حسب التوقيت العالمي',quakeDots:'كل نقطة تمثل زلزالًا مسجلًا',quakeMild:'قوة ٢٫٥–٣٫٩',quakeMedium:'قوة ٤–٤٫٩',quakeStrong:'قوة ٥+',
       globeUnavailable:'الكرة ثلاثية الأبعاد غير متاحة حاليًا، لكن بيانات الأحداث ما زالت ظاهرة في القائمة.',eventWebsite:'فتح سجل USGS',
       magDistribution:'توزيع درجات القوة',magDistributionDesc:'عدد الأحداث في كل فئة',dailyCounts:'النشاط حسب الوقت',dailyCountsDesc:'عدد الزلازل في كل فترة زمنية',
       noAnalytics:'تحتاج الرسومات إلى بيانات USGS أولًا.',importantNote:'هذه أحداث مسجلة وليست تنبؤًا أو نظام إنذار. الأعداد تعتمد على الفترة الزمنية والحد الأدنى للقوة المختارين.',
@@ -129,7 +131,7 @@
     selected:null, compareData:null, compareLoading:false, compareError:false
   };
   const feedCache = new Map();
-  let globe = null, globeObserver = null, chartInstances = [], toastTimer = null, searchTimer = null, requestId = 0;
+  let globe = null, globeObserver = null, stopSolarLighting = null, chartInstances = [], toastTimer = null, searchTimer = null, requestId = 0;
 
   function safeStorage(k) { try { return localStorage.getItem(k); } catch { return null; } }
   function store(k,v) { try { localStorage.setItem(k,v); } catch {} }
@@ -231,6 +233,7 @@
   function eventRow(evt) {return `<button class="event-row" data-event-id="${x(evt.id)}" type="button" aria-label="${x(evt.place)}, ${x(t('magnitude'))} ${evt.mag}"><span class="magnitude-chip ${magClass(evt.mag)}">${x(num(evt.mag,1))}</span><span class="event-description"><span class="event-name" dir="auto">${x(evt.place)}</span><span class="event-meta">${x(relativeTime(evt.time))} · ${x(num(evt.depth,1))} ${x(t('depthUnit'))}</span></span><span class="event-chevron" aria-hidden="true">›</span></button>`;}
   function eventsList(data,count) {if(!data.length)return `<p class="selected-blank">${x(t('noEventsShort'))}</p>`;return data.slice(0,count).map(eventRow).join('');}
   function updatedNote() {return `<span class="card-subtitle">${x(t('updated'))}: ${state.generated?x(dateString(state.generated)):x(t('unknown'))}</span>`;}
+  function quakeLegend(){return `<div class="quake-legend" aria-label="${x(t('quakeDots'))}"><span class="quake-legend-title">${x(t('quakeDots'))}</span><span class="quake-level"><i class="quake-dot mild"></i>${x(t('quakeMild'))}</span><span class="quake-level"><i class="quake-dot medium"></i>${x(t('quakeMedium'))}</span><span class="quake-level"><i class="quake-dot strong"></i>${x(t('quakeStrong'))}</span></div>`;}
   function globeMarkup(id,hero) {return `<div id="${id}" class="${hero?'hero-globe':'explorer-globe'}"><div class="globe-fallback" aria-hidden="true">${icon('globe')}</div></div>`;}
   function renderOverview(){const rows=filtered();return `${sectionIntro('overview')}${errorMessage()}
     <section class="hero">
@@ -251,7 +254,7 @@
       ${e.url?`<a class="secondary-btn small-btn" href="${x(e.url)}" target="_blank" rel="noopener noreferrer">${x(t('eventWebsite'))}${icon('external')}</a>`:''}`;
   }
   function renderExplorer(){const rows=filtered();return `${sectionIntro('explorer')}${errorMessage()}${selectionToolbar()}
-    <div class="explorer-grid"><section class="card globe-card"><div class="globe-card-title">${x(t('globeStatus'))}</div>${globeMarkup('explorerGlobe',false)}<div class="globe-control-hint">${x(t('globeHint'))}</div></section>
+    <div class="explorer-grid"><section class="card globe-card"><div class="globe-card-title">${x(t('globeStatus'))}</div>${globeMarkup('explorerGlobe',false)}<div class="globe-sun-note">${icon('sun')}${x(t('earthTime'))}</div>${quakeLegend()}<div class="globe-control-hint">${x(t('globeHint'))}</div></section>
     <div class="explorer-side"><section class="card selected-card"><div class="card-title">${x(t('details'))}</div><div id="selectedEvent">${selectedMarkup()}</div></section>
     <section class="card section-card"><div class="card-header"><div><div class="card-title">${x(t('recentActivity'))}</div><div class="card-subtitle">${x(t('results'))}: ${num(rows.length)}</div></div></div><div class="event-scroll">${eventsList(rows,40)}</div></section></div></div>
     ${disclaimer()}`;}
@@ -301,7 +304,7 @@
       bins.push({label,start,end:finish,count:rows.filter(r=>r.time>=start&&r.time<finish).length});
     }return bins;
   }
-  function teardownVisuals(){chartInstances.forEach(c=>{try{c.destroy()}catch{}});chartInstances=[];
+  function teardownVisuals(){if(stopSolarLighting){stopSolarLighting();stopSolarLighting=null;}chartInstances.forEach(c=>{try{c.destroy()}catch{}});chartInstances=[];
     if(globeObserver){globeObserver.disconnect();globeObserver=null;}
     if(globe){try{globe._destructor()}catch{}globe=null;}}
   function chartStyles(){const light=state.theme==='light';return {text:light?'#647b8b':'#8297aa',grid:light?'#dce9ef':'#1a3445',ticks:light?'#264456':'#aec5d3'};}
@@ -340,17 +343,17 @@
     if(typeof window.Globe!=='function'){if(!hero){const caption=document.createElement('div');caption.className='globe-control-hint';caption.style.bottom='60px';caption.textContent=t('globeUnavailable');el.appendChild(caption);}return;}
     try {
       const entries=filtered().slice(0,650);
-      // Earth nighttime texture provided by the globe.gl project's official example asset.
+      // Start with a bright Earth image while true solar shading textures load.
       globe=new Globe(el,{rendererConfig:{antialias:true,alpha:true}})
-        .globeImageUrl('https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg')
+        .globeImageUrl('https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg')
         .bumpImageUrl('https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png')
         .backgroundColor('rgba(0,0,0,0)')
         .showAtmosphere(true).atmosphereColor('#6ac3e1').atmosphereAltitude(.17)
         .pointsData(entries).pointLat(e=>e.lat).pointLng(e=>e.lng)
-        .pointAltitude(e=>Math.max(.007,Math.min(.1,e.mag*.013))).pointRadius(e=>Math.max(.13,Math.min(.33,e.mag*.047)))
+        .pointAltitude(.0015).pointRadius(e=>e.mag>=5?.31:e.mag>=4?.25:.19)
         .pointColor(e=>magColor(e.mag))
         .pointLabel(e=>`${x(e.place)} · M${x(e.mag.toFixed(1))}`)
-        .pointsMerge(false)
+        .pointResolution(12).pointsMerge(false)
         .onPointClick(e=>{state.selected=e;if(state.page==='explorer'){$('#selectedEvent').innerHTML=selectedMarkup();iconHTML();}else{openModal(e);}});
       globe.width(el.clientWidth).height(el.clientHeight);
       globe.pointOfView({lat:23,lng:49,altitude:hero?2.15:2.1},0);
@@ -358,6 +361,10 @@
       if(hero)controls.enableZoom=false;
       const fallback=el.querySelector('.globe-fallback');if(fallback)fallback.remove();
       if('ResizeObserver' in window){globeObserver=new ResizeObserver(()=>{if(globe&&el.isConnected)globe.width(el.clientWidth).height(el.clientHeight);});globeObserver.observe(el);}
+      const activeGlobe=globe;
+      import('./solar-globe.js').then(({startSolarLighting})=>startSolarLighting(activeGlobe,()=>globe===activeGlobe))
+        .then(stop=>{if(!stop)return;if(globe===activeGlobe)stopSolarLighting=stop;else stop();})
+        .catch(err=>console.warn('Solar lighting unavailable; using the clear daytime map:',err));
     }catch(err){console.warn('Globe renderer unavailable:',err);globe=null;}
   }
   function render(){teardownVisuals();applyShell();const main=$('#main');
