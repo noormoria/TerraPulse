@@ -44,8 +44,8 @@
       feedStatus:'USGS FEED',footerTag:'Data informs, it does not predict.',footerSource:'Source: USGS Earthquake Hazards Program',
       heroTag:'GLOBAL SEISMIC INTELLIGENCE',heroLine1:'The planet,',heroLine2:'in perspective.',heroDesc:'Explore earthquakes around the world through verified data and a living 3D globe.',
       exploreWorld:'Explore the globe',viewAnalytics:'View analytics',threeD:'INTERACTIVE 3D EARTH',
-      overviewEyebrow:'REAL-WORLD DATA · INTERACTIVE INSIGHTS',overviewTitle:'Your window into Earth activity',overviewDesc:'A real-time-style view of recently reported earthquakes, updated from official USGS feeds.',
-      explorerEyebrow:'INTERACTIVE WORLD MAP',explorerTitle:'Discover the world in motion',explorerDesc:'Rotate the planet, inspect reported earthquake events and explore their details.',
+      overviewEyebrow:'LATEST RECORDED EARTHQUAKES',overviewTitle:'Earthquakes around the world',overviewDesc:'See where earthquakes were reported most recently. Select a country or area to view the actual events on the globe.',
+      explorerEyebrow:'EARTHQUAKE MAP',explorerTitle:'View earthquakes on the globe',explorerDesc:'Each colored dot is a recorded earthquake. Select it for the magnitude, depth and reported time.',
       analyticsEyebrow:'EXPLORE THE NUMBERS',analyticsTitle:'Seismic activity, decoded',analyticsDesc:'Explore descriptive trends from the selected USGS dataset, not earthquake forecasts.',
       compareEyebrow:'TIME-BASED COMPARISON',compareTitle:'Measure what changed',compareDesc:'Compare earthquakes recorded in the latest 24-hour window with the 24 hours before it.',
       reportsEyebrow:'EXPORT YOUR FINDINGS',reportsTitle:'Turn data into a report',reportsDesc:'Export your current dataset as CSV or print a concise summary to PDF.',
@@ -86,8 +86,8 @@
       feedStatus:'بيانات USGS',footerTag:'البيانات تُفسّر الواقع ولا تتنبأ به.',footerSource:'المصدر: هيئة المسح الجيولوجي الأمريكية USGS',
       heroTag:'تحليلات النشاط الزلزالي العالمي',heroLine1:'استكشف الكوكب',heroLine2:'من منظور البيانات.',heroDesc:'تابع الزلازل المسجلة حول العالم باستخدام بيانات موثوقة وكرة أرضية تفاعلية ثلاثية الأبعاد.',
       exploreWorld:'استكشف الكرة الأرضية',viewAnalytics:'عرض التحليلات',threeD:'أرض تفاعلية ثلاثية الأبعاد',
-      overviewEyebrow:'بيانات واقعية · رؤى تفاعلية',overviewTitle:'نافذتك لفهم نشاط الأرض',overviewDesc:'عرض للزلازل المسجلة حديثًا والمحدّثة عبر موجز بيانات USGS الرسمي.',
-      explorerEyebrow:'خريطة عالمية تفاعلية',explorerTitle:'اكتشف حركة الأرض',explorerDesc:'حرّك الكرة الأرضية، واستعرض الزلازل المسجلة وتفاصيل كل حدث.',
+      overviewEyebrow:'أحدث الزلازل المسجلة',overviewTitle:'الزلازل حول العالم',overviewDesc:'تعرفي على أماكن أحدث الزلازل المسجلة رسميًا، ثم اختاري دولة أو منطقة لمشاهدة تفاصيلها على الكرة الأرضية.',
+      explorerEyebrow:'خريطة الزلازل',explorerTitle:'شاهدي الزلازل على الخريطة',explorerDesc:'كل نقطة ملونة تمثل زلزالًا مسجلًا. اضغطي عليها لمعرفة قوته وعمقه ووقت تسجيله.',
       analyticsEyebrow:'تحليل الأرقام',analyticsTitle:'افهم النشاط الزلزالي',analyticsDesc:'حلّل أنماط البيانات المسجلة في الفترة المختارة، دون تقديم تنبؤات بالزلازل.',
       compareEyebrow:'مقارنة زمنية',compareTitle:'ما الذي تغيّر؟',compareDesc:'قارن أحداث آخر 24 ساعة بالأحداث المسجلة خلال الـ24 ساعة التي سبقتها.',
       reportsEyebrow:'تصدير النتائج',reportsTitle:'حوّل البيانات إلى تقرير',reportsDesc:'صدّر البيانات الحالية بصيغة CSV أو اطبع ملخصًا واحفظه PDF.',
@@ -263,7 +263,7 @@
       '<span class="recent-index">'+String(i+1).padStart(2,'0')+'</span>'+
       '<span class="recent-place-main"><strong dir="auto">'+x(regionTitle(g.region))+'</strong><small>'+x(t(g.region.kind==='country'?'countryKind':'areaKind'))+' · '+x(t('lastRecorded'))+' '+x(relativeTime(g.last.time))+'</small></span>'+
       '<span class="recent-count">'+x(num(g.count))+' <small>'+x(t('eventCount'))+'</small></span>'+
-      '<span class="recent-mag">M'+x(num(g.last.mag,1))+'</span>'+
+      '<span class="recent-mag" title="'+x(t('magnitude'))+'">M'+x(num(g.last.mag,1))+'</span>'+
       '<span class="recent-arrow" aria-hidden="true">↗</span></button>').join(''):'<p class="selected-blank">'+x(t('noEventsShort'))+'</p>';
     return '<section class="recent-panel" aria-label="'+x(t('recentPlacesTitle'))+'">'+
       '<div class="recent-panel-top"><div><span class="eyebrow">USGS · '+x(t(state.period))+'</span><h2>'+x(t('recentPlacesTitle'))+'</h2><p>'+x(t('recentPlacesDesc'))+'</p></div><span class="source-pill"><span class="live-dot"></span> USGS</span></div>'+
