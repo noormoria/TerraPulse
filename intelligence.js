@@ -11,7 +11,7 @@
       catalog:'USGS historical catalog',notPredictions:'Observed data, not earthquake forecasts.',source:'Data source',platform:'Platform',
       eyebrow:'GEOSPATIAL DATA SCIENCE',title:'Data Intelligence',intro:'Explore historical earthquake data, geographic clusters and activity benchmarks built with Python.',
       heroTitle:'From raw observations to explainable insights',heroText:'Every figure comes from USGS records. No synthetic events, predicted earthquakes or fabricated alerts.',
-      seeCode:'View Python pipeline',loading:'Loading real historical analysis…',
+      loading:'Loading real historical analysis…',
       trendTitle:'30-day activity trend',trendDesc:'Recorded M4.5+ earthquakes per complete UTC day',distTitle:'Magnitude distribution',distDesc:'Distribution within the 365-day catalog',
       clustersTitle:'Geographic clusters',clustersDesc:'DBSCAN · geographic distance · not a hazard prediction',
       scatterNote:'Each marker shows the approximate geographic center of a cluster; its size represents observed earthquakes in the group.',
@@ -21,7 +21,7 @@
       datasetLabel:'Dataset',cleanupLabel:'Preprocessing',cleanup:'Missing-value checks, duplicate IDs and coordinate validation',
       algoLabel:'Clustering',anomalyLabel:'Activity comparison',anomalyMethod:'7-day count vs historical 90th percentile (52 weeks)',
       caution:'Clusters are historical concentrations, not predictions. Above-baseline activity is a descriptive comparison, not a safety warning.',
-      getDataset:'Download historical dataset (CSV)',getAnalysis:'Download analysis (JSON)',footer:'Independent educational data science project',
+      getDataset:'Download historical dataset (CSV)',footer:'Independent educational data science project',
       events:'Observed events',meanMag:'Mean magnitude',maxMag:'Maximum magnitude',medianDepth:'Median depth',eventsNote:'M4.5+ · last 365 days',
       meanNote:'Recorded earthquake magnitudes',maxNote:'Largest recorded magnitude',depthNote:'Kilometers · observed records',
       range:'Historical catalog period',asOf:'Last data update',
@@ -31,7 +31,7 @@
       group:'Group',eventsCount:'events',mean:'Mean magnitude',depth:'Mean depth',km:'km',unclassified:'Unclustered points',
       loadingError:'The historical dataset is not published yet or could not be loaded. The real-data workflow needs to finish successfully before these charts appear.',
       pending:'Historical analysis has not been generated yet. In GitHub, open Actions → Update TerraPulse historical intelligence → Run workflow. When it finishes, reload this page.',
-      viewActions:'Open GitHub Actions',retry:'Try again',noClusters:'The current dataset contains no groups matching the clustering parameters.',
+      retry:'Try again',noClusters:'The current dataset contains no groups matching the clustering parameters.',
       longitude:'Longitude',latitude:'Latitude',count:'Count',week:'Week',date:'Date',
     },
     ar: {
@@ -39,7 +39,7 @@
       catalog:'السجل التاريخي من USGS',notPredictions:'بيانات مسجلة وليست توقعات زلازل.',source:'مصدر البيانات',platform:'المنصة',
       eyebrow:'علم البيانات الجغرافية',title:'ذكاء البيانات',intro:'استكشفي بيانات الزلازل التاريخية والتجمعات الجغرافية ومقارنات النشاط باستخدام Python.',
       heroTitle:'من البيانات الخام إلى نتائج قابلة للتفسير',heroText:'كل رقم مشتق من سجلات USGS الحقيقية، دون أحداث وهمية أو تنبؤات بوقوع زلازل أو تنبيهات مختلقة.',
-      seeCode:'اطلعي على كود Python',loading:'جارٍ تحميل التحليل التاريخي الحقيقي…',
+      loading:'جارٍ تحميل التحليل التاريخي الحقيقي…',
       trendTitle:'اتجاه النشاط خلال 30 يومًا',trendDesc:'عدد الزلازل المسجلة بقوة 4.5 فأكثر لكل يوم UTC مكتمل',
       distTitle:'توزيع قوة الزلازل',distDesc:'توزيع قيم القوة خلال آخر 365 يومًا',
       clustersTitle:'التجمعات الجغرافية',clustersDesc:'DBSCAN · المسافة الجغرافية · ليس تنبؤًا بالخطر',
@@ -50,7 +50,7 @@
       datasetLabel:'مجموعة البيانات',cleanupLabel:'معالجة البيانات',cleanup:'معالجة القيم المفقودة وحذف المعرّفات المكررة والتحقق من الإحداثيات',
       algoLabel:'التجميع',anomalyLabel:'مقارنة النشاط',anomalyMethod:'عدد 7 أيام مقابل المئين التسعين خلال 52 أسبوعًا',
       caution:'التجمعات تصف مواقع تاريخية وليست تنبؤات. تجاوز النشاط المستوى التاريخي مجرد مقارنة وصفية، وليس تحذيرًا من الخطر.',
-      getDataset:'تنزيل مجموعة البيانات التاريخية CSV',getAnalysis:'تنزيل نتائج التحليل JSON',footer:'مشروع تعليمي مستقل في علم البيانات',
+      getDataset:'تنزيل مجموعة البيانات التاريخية CSV',footer:'مشروع تعليمي مستقل في علم البيانات',
       events:'الأحداث المسجلة',meanMag:'متوسط القوة',maxMag:'أعلى قوة',medianDepth:'وسيط العمق',eventsNote:'قوة 4.5+ خلال آخر 365 يومًا',
       meanNote:'متوسط قوى الزلازل المسجلة',maxNote:'أكبر قوة مسجلة',depthNote:'بالكيلومتر حسب السجل',
       range:'الفترة التاريخية',asOf:'آخر تحديث للبيانات',
@@ -60,7 +60,7 @@
       group:'تجمع',eventsCount:'زلزالًا',mean:'متوسط القوة',depth:'متوسط العمق',km:'كم',unclassified:'نقاط غير مصنفة ضمن تجمع',
       loadingError:'لم يتم نشر مجموعة البيانات التاريخية بعد، أو تعذر تحميلها. يجب أن يكتمل تشغيل التحليل الفعلي قبل عرض الرسوم.',
       pending:'لم يُنشأ التحليل التاريخي بعد. افتحي GitHub ← Actions ← Update TerraPulse historical intelligence ← Run workflow، ثم حدّثي الصفحة عند اكتماله.',
-      viewActions:'فتح GitHub Actions',retry:'إعادة المحاولة',noClusters:'لا توجد تجمعات مطابقة لإعدادات الخوارزمية ضمن البيانات الحالية.',
+      retry:'إعادة المحاولة',noClusters:'لا توجد تجمعات مطابقة لإعدادات الخوارزمية ضمن البيانات الحالية.',
       longitude:'خط الطول',latitude:'خط العرض',count:'العدد',week:'الأسبوع',date:'التاريخ',
     },
   };
@@ -132,7 +132,7 @@
     renderHotspots(r);
     renderBenchmark(r);
   }
-  function showError(key){$('#intelData').hidden=true;const el=$('#status');el.hidden=false;el.classList.add('error');el.innerHTML=`<div><p>${escapeHTML(t(key))}</p><a class="intel-outline" target="_blank" rel="noopener noreferrer" href="https://github.com/noormoria/TerraPulse/actions/workflows/update-intelligence.yml">${escapeHTML(t('viewActions'))} ↗</a> <button class="intel-outline" id="retryLoad" type="button">${escapeHTML(t('retry'))}</button></div>`;$('#retryLoad').addEventListener('click',load);}
+  function showError(key){$('#intelData').hidden=true;const el=$('#status');el.hidden=false;el.classList.add('error');el.innerHTML=`<div><p>${escapeHTML(t(key))}</p><button class="intel-outline" id="retryLoad" type="button">${escapeHTML(t('retry'))}</button></div>`;$('#retryLoad').addEventListener('click',load);}
   async function load(){
     const el=$('#status');el.classList.remove('error');el.hidden=false;el.innerHTML=`<span class="spinner"></span><span>${escapeHTML(t('loading'))}</span>`;
     try {
