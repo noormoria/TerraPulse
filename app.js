@@ -38,6 +38,7 @@
   const icon = name => `<span class="ico" data-icon="${name}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.info}</svg></span>`;
   const tr = {
     en: {
+      recentPlacesTitle:'Where were the latest earthquakes?',recentPlacesDesc:'Choose a country or USGS-reported region to see its events on the globe.',countryKind:'Country',areaKind:'USGS area',lastRecorded:'Last reported',placesFromSource:'Countries are identified by map boundaries. Offshore events are listed as USGS regions.',openArea:'Explore this location',clearLocation:'All locations',shownArea:'Viewing location',globeSectionTitle:'Explore the Earth',globeSectionDesc:'Colored dots are reported earthquakes. Tap any dot to see the recorded magnitude, time and depth.',
       workspace:'WORKSPACE',overview:'Overview',explorer:'Live Explorer',analytics:'Analytics',compare:'Compare',reports:'Reports',
       dataSource:'USGS data feed',sourceFoot:'Official reported earthquakes. Not predictions.',viewSource:'View data source',platform:'Platform',
       feedStatus:'USGS FEED',footerTag:'Data informs, it does not predict.',footerSource:'Source: USGS Earthquake Hazards Program',
@@ -79,6 +80,7 @@
       dataSnapshot:'Loaded data from source',eventCount:'events',regionUnknown:'Unspecified location', allDataNote:'Export and report use the currently loaded data.'
     },
     ar: {
+      recentPlacesTitle:'أين سُجلت أحدث الزلازل؟',recentPlacesDesc:'اختاري دولة أو منطقة لعرض الزلازل المسجلة فيها على الكرة الأرضية.',countryKind:'دولة',areaKind:'منطقة بحسب USGS',lastRecorded:'آخر زلزال',placesFromSource:'تُحدد الدول باستخدام حدودها الجغرافية؛ وتُعرض الزلازل البحرية بحسب المناطق المذكورة في USGS.',openArea:'استكشاف الموقع',clearLocation:'كل المواقع',shownArea:'الموقع المحدد',globeSectionTitle:'استكشفي الأرض',globeSectionDesc:'النقاط الملونة هي زلازل مسجلة. اضغطي على النقطة لمعرفة القوة والوقت والعمق.',
       workspace:'مساحة العمل',overview:'نظرة عامة',explorer:'استكشاف مباشر',analytics:'التحليلات',compare:'المقارنة',reports:'التقارير',
       dataSource:'بيانات هيئة USGS',sourceFoot:'زلازل مسجلة رسميًا، وليست تنبؤات.',viewSource:'عرض مصدر البيانات',platform:'المنصة',
       feedStatus:'بيانات USGS',footerTag:'البيانات تُفسّر الواقع ولا تتنبأ به.',footerSource:'المصدر: هيئة المسح الجيولوجي الأمريكية USGS',
@@ -127,7 +129,7 @@
     lang: safeStorage('tp-lang') === 'ar' ? 'ar' : 'en',
     theme: safeStorage('tp-theme') === 'light' ? 'light' : 'dark',
     page: ['overview','explorer','analytics','compare','reports'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview',
-    period:'week', minMag:'2.5', search:'', data:[], generated:null, loading:true, error:false,
+    period:'day', minMag:'2.5', search:'', selectedRegion:null, data:[], generated:null, loading:true, error:false,
     selected:null, compareData:null, compareLoading:false, compareError:false
   };
   const feedCache = new Map();
@@ -187,7 +189,16 @@
     catch(err){console.warn('Compare feed failed:',err);state.compareError=true;state.compareData=null;}
     finally{state.compareLoading=false;if(state.page==='compare')render();}
   }
-  function filtered() {const q=state.search.trim().toLocaleLowerCase();return q ? state.data.filter(e=>e.place.toLocaleLowerCase().includes(q)) : state.data;}
+  function regionOf(e) {return window.TerraRegions?.locate(e) || {key:'region:'+e.place,kind:'region',name:e.place};}
+  function regionTitle(record) {return window.TerraRegions?.label(record,state.lang) || record.name;}
+  function filtered() {
+    const q=state.search.trim().toLocaleLowerCase();
+    return state.data.filter(e=>{
+      const region=regionOf(e);
+      if(state.selectedRegion && region.key!==state.selectedRegion)return false;
+      return !q || e.place.toLocaleLowerCase().includes(q) || regionTitle(region).toLocaleLowerCase().includes(q);
+    });
+  }
   function stats(data) {
     const total=data.length, strongest=total?Math.max(...data.map(e=>e.mag)):null;
     const avg=total?data.reduce((s,e)=>s+e.mag,0)/total:null;
@@ -237,17 +248,43 @@
   function updatedNote() {return `<span class="card-subtitle">${x(t('updated'))}: ${state.generated?x(dateString(state.generated)):x(t('unknown'))}</span>`;}
   function quakeLegend(){return `<div class="quake-legend" aria-label="${x(t('quakeDots'))}"><span class="quake-legend-title">${x(t('quakeDots'))}</span><span class="quake-level"><i class="quake-dot mild"></i>${x(t('quakeMild'))}</span><span class="quake-level"><i class="quake-dot medium"></i>${x(t('quakeMedium'))}</span><span class="quake-level"><i class="quake-dot strong"></i>${x(t('quakeStrong'))}</span></div>`;}
   function globeMarkup(id,hero) {return `<div id="${id}" class="${hero?'hero-globe':'explorer-globe'}"><div class="globe-fallback" aria-hidden="true">${icon('globe')}</div></div>`;}
-  function renderOverview(){const rows=filtered();return `${sectionIntro('overview')}${errorMessage()}
-    <section class="hero">
-      <div class="hero-copy ${state.lang==='ar'?'text-rtl':''}"><div class="hero-label"><span class="live-dot"></span>${x(t('heroTag'))}</div>
-        <h1>${x(t('heroLine1'))}<br/><span>${x(t('heroLine2'))}</span></h1><p>${x(t('heroDesc'))}</p>
-        <div class="hero-actions"><button class="primary-btn" data-nav="explorer">${x(t('exploreWorld'))}${icon('arrow')}</button><button class="ghost-btn" data-nav="analytics">${x(t('viewAnalytics'))}</button></div>
-      </div>${globeMarkup('heroGlobe',true)}<span class="globe-overlay"></span><span class="hero-corner">◉ ${x(t('threeD'))}</span>
-    </section>${selectionToolbar(false)}${dataStats()}
-    <div class="section-grid"><section class="card section-card"><div class="card-header"><div><div class="card-title">${x(t('activityTrend'))}</div><div class="card-subtitle">${x(t('activityTrendDesc'))}</div></div><button class="text-link" data-nav="analytics">${x(t('viewAll'))}${icon('arrow')}</button></div>
-      <div class="chart-area">${rows.length?'<canvas id="overviewChart" aria-label="Earthquake frequency over time" role="img"></canvas>':`<div class="chart-empty">${x(t('noAnalytics'))}</div>`}</div></section>
-    <section class="card section-card"><div class="card-header"><div><div class="card-title">${x(t('latestEvents'))}</div><div class="card-subtitle">${x(t('latestEventsDesc'))}</div></div><button class="text-link" data-nav="explorer">${x(t('viewAll'))}${icon('arrow')}</button></div><div class="event-list">${eventsList(rows,5)}</div></section></div>
-    ${disclaimer()}`;}
+  function recentPlacesPanel() {
+    const grouped=new Map();
+    for(const e of state.data) {
+      const r=regionOf(e);
+      if(!grouped.has(r.key))grouped.set(r.key,{region:r,count:0,last:e,highest:e.mag});
+      const g=grouped.get(r.key);
+      g.count++;
+      if(e.time>g.last.time)g.last=e;
+      g.highest=Math.max(g.highest,e.mag);
+    }
+    const places=[...grouped.values()].sort((a,b)=>b.last.time-a.last.time).slice(0,8);
+    const cards=places.length?places.map((g,i)=>'<button class="recent-place" type="button" data-region="'+x(g.region.key)+'" aria-label="'+x(regionTitle(g.region)+': '+t('openArea'))+'">'+
+      '<span class="recent-index">'+String(i+1).padStart(2,'0')+'</span>'+
+      '<span class="recent-place-main"><strong dir="auto">'+x(regionTitle(g.region))+'</strong><small>'+x(t(g.region.kind==='country'?'countryKind':'areaKind'))+' · '+x(t('lastRecorded'))+' '+x(relativeTime(g.last.time))+'</small></span>'+
+      '<span class="recent-count">'+x(num(g.count))+' <small>'+x(t('eventCount'))+'</small></span>'+
+      '<span class="recent-mag">M'+x(num(g.last.mag,1))+'</span>'+
+      '<span class="recent-arrow" aria-hidden="true">↗</span></button>').join(''):'<p class="selected-blank">'+x(t('noEventsShort'))+'</p>';
+    return '<section class="recent-panel" aria-label="'+x(t('recentPlacesTitle'))+'">'+
+      '<div class="recent-panel-top"><div><span class="eyebrow">USGS · '+x(t(state.period))+'</span><h2>'+x(t('recentPlacesTitle'))+'</h2><p>'+x(t('recentPlacesDesc'))+'</p></div><span class="source-pill"><span class="live-dot"></span> USGS</span></div>'+
+      selectionToolbar(false)+
+      '<div class="recent-places-list">'+cards+'</div>'+
+      '<p class="recent-panel-foot">'+x(t('placesFromSource'))+'</p></section>';
+  }
+  function renderOverview(){
+    const rows=state.data,s=stats(rows);
+    return sectionIntro('overview')+errorMessage()+recentPlacesPanel()+
+      '<section class="hero home-globe-hero"><div class="hero-copy '+(state.lang==='ar'?'text-rtl':'')+'">'+
+      '<div class="hero-label"><span class="live-dot"></span>'+x(t('globeStatus'))+'</div>'+
+      '<h1>'+x(t('globeSectionTitle'))+'</h1><p>'+x(t('globeSectionDesc'))+'</p>'+
+      '<div class="hero-actions"><button class="primary-btn" data-nav="explorer">'+x(t('exploreWorld'))+icon('arrow')+'</button>'+
+      '<button class="ghost-btn" data-nav="analytics">'+x(t('viewAnalytics'))+'</button></div></div>'+
+      globeMarkup('heroGlobe',true)+'<span class="globe-overlay"></span></section>'+
+      '<div class="overview-mini-stats">'+
+      statCard('activity',t('totalEvents'),num(s.total),t('statSource'))+
+      statCard('alert',t('strongest'),s.strongest===null?'—':num(s.strongest,1),t('statStrong'))+
+      '</div>'+disclaimer();
+  }
   function selectedMarkup() {
     const e=state.selected;if(!e)return `<div class="selected-blank">${x(t('selectEvent'))}</div>`;
     return `<div class="magnitude-chip ${magClass(e.mag)}">${x(num(e.mag,1))}</div><h3 style="font-size:15px;line-height:1.5;margin:10px 0" dir="auto">${x(e.place)}</h3>
@@ -255,7 +292,7 @@
       <div><div class="details-key">${x(t('coordinates'))}</div><div class="details-value">${x(num(e.lat,2))}, ${x(num(e.lng,2))}</div></div></div>
       ${e.url?`<a class="secondary-btn small-btn" href="${x(e.url)}" target="_blank" rel="noopener noreferrer">${x(t('eventWebsite'))}${icon('external')}</a>`:''}`;
   }
-  function renderExplorer(){const rows=filtered();return `${sectionIntro('explorer')}${errorMessage()}${selectionToolbar()}
+  function renderExplorer(){const rows=filtered(),r=rows[0]?regionOf(rows[0]):null;return `${sectionIntro('explorer')}${errorMessage()}${state.selectedRegion?`<div class="region-filter-tag">${x(t('shownArea'))}: <strong>${x(r?regionTitle(r):state.selectedRegion)}</strong> <button class="secondary-btn small-btn" data-action="clear-region">${x(t('clearLocation'))} ×</button></div>`:''}${selectionToolbar()}
     <div class="explorer-grid"><section class="card globe-card"><div class="globe-card-title">${x(t('globeStatus'))}</div>${globeMarkup('explorerGlobe',false)}<div class="globe-sun-note">${icon('sun')}${x(t('earthTime'))}</div>${quakeLegend()}<div class="globe-control-hint">${x(t('globeHint'))}</div></section>
     <div class="explorer-side"><section class="card selected-card"><div class="card-title">${x(t('details'))}</div><div id="selectedEvent">${selectedMarkup()}</div></section>
     <section class="card section-card"><div class="card-header"><div><div class="card-title">${x(t('recentActivity'))}</div><div class="card-subtitle">${x(t('results'))}: ${num(rows.length)}</div></div></div><div class="event-scroll">${eventsList(rows,40)}</div></section></div></div>
@@ -358,7 +395,8 @@
         .pointResolution(12).pointsMerge(false)
         .onPointClick(e=>{state.selected=e;if(state.page==='explorer'){$('#selectedEvent').innerHTML=selectedMarkup();iconHTML();}else{openModal(e);}});
       globe.width(el.clientWidth).height(el.clientHeight);
-      globe.pointOfView({lat:23,lng:49,altitude:hero?2.15:2.1},0);
+      const focus=(!hero&&state.selectedRegion&&entries.length)?entries[0]:null;
+      globe.pointOfView(focus?{lat:focus.lat,lng:focus.lng,altitude:1.55}:{lat:23,lng:49,altitude:hero?2.15:2.1},0);
       const controls=globe.controls();controls.autoRotate=true;controls.autoRotateSpeed=hero?.3:.18;controls.enableZoom=true;
       if(hero)controls.enableZoom=false;
       const fallback=el.querySelector('.globe-fallback');if(fallback)fallback.remove();
@@ -379,6 +417,7 @@
   }
   function navigate(page){if(!['overview','explorer','analytics','compare','reports'].includes(page))return;
     state.page=page;state.selected=null;history.replaceState(null,'',`#${page}`);closeSidebar();closeModal();
+    if(page==='overview')state.selectedRegion=null;
     if(page==='compare' && (!state.compareData || state.compareError)){loadCompare();}else render();
     window.scrollTo({top:0,behavior:'auto'});
   }
@@ -404,11 +443,12 @@
   document.addEventListener('click',evt=>{
     if(evt.target.id==='mobileScrim'){closeSidebar();return;}
     if(evt.target.id==='modalHost'){closeModal();return;}
+    const selectedPlace=evt.target.closest('[data-region]');if(selectedPlace){state.selectedRegion=selectedPlace.dataset.region;state.search='';navigate('explorer');return;}
     const nav=evt.target.closest('[data-nav]');if(nav){evt.preventDefault();navigate(nav.dataset.nav);return;}
     const eventBtn=evt.target.closest('[data-event-id]');if(eventBtn){const event=filtered().find(o=>o.id===eventBtn.dataset.eventId);if(event){state.selected=event;openModal(event);
       if(globe && state.page==='explorer')globe.pointOfView({lat:event.lat,lng:event.lng,altitude:1.4},850);}return;}
     const action=evt.target.closest('[data-action]');if(!action)return;
-    switch(action.dataset.action){case 'refresh':loadData(true);break;case 'compare-retry':loadCompare();break;
+    switch(action.dataset.action){case 'clear-region':state.selectedRegion=null;state.search='';render();break;case 'refresh':loadData(true);break;case 'compare-retry':loadCompare();break;
       case 'close-modal':closeModal();break;case 'csv':downloadCsv();break;case 'print':window.print();break;}
   });
   document.addEventListener('change',evt=>{
@@ -430,4 +470,5 @@
   window.addEventListener('hashchange',()=>{const page=location.hash.replace('#','');if(page!==state.page)navigate(page);});
 
   applyShell();loadData();
+  window.TerraRegions?.load().then(ok=>{if(ok&&!state.loading){state.selectedRegion=null;render();}});
 })();
