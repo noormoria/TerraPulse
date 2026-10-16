@@ -57,7 +57,7 @@
       loading:'Loading earthquake data from USGS…',loadingShort:'Loading data…',failed:'Could not load live USGS data. Check your internet connection and try again.',retry:'Try again',
       noEvents:'No earthquakes matched the selected filters.',noEventsShort:'No matching events',timeUnknown:'Time not available',magnitude:'Magnitude',depth:'Depth',
       latitude:'Latitude',longitude:'Longitude',reportedAt:'Reported time',place:'Location',details:'Event details',selectEvent:'Select an event on the globe or in the list to view its details.',
-      globeHint:'Drag to rotate · Scroll to zoom · Select a point',globeStatus:'USGS · EARTHQUAKE EVENTS',recentActivity:'Recent activity',
+      mapReset:'Reset map',mapLatest:'Show latest',mapSelected:'Selected earthquake',mapTapHint:'Tap a colored marker or an earthquake below to see details.',quickEvents:'Tap an earthquake to locate it',globeHint:'Drag to rotate · Tap a colored marker to inspect it',globeStatus:'USGS · EARTHQUAKE EVENTS',recentActivity:'Recent activity',
       earthTime:'Actual sunlight · synced to UTC',quakeDots:'Dots show reported earthquakes',quakeMild:'M2.5–3.9',quakeMedium:'M4–4.9',quakeStrong:'M5+',
       globeUnavailable:'3D globe unavailable. The event data remains accessible below.',eventWebsite:'Open USGS record',
       magDistribution:'Magnitude distribution',magDistributionDesc:'Frequency by magnitude interval',dailyCounts:'Activity by time',dailyCountsDesc:'Reported earthquakes per time interval',
@@ -99,7 +99,7 @@
       loading:'جارٍ تحميل بيانات الزلازل من USGS…',loadingShort:'جارٍ تحميل البيانات…',failed:'تعذر تحميل بيانات USGS. تحققي من اتصال الإنترنت وحاولي مجددًا.',retry:'إعادة المحاولة',
       noEvents:'لا توجد زلازل مطابقة للفلاتر المحددة.',noEventsShort:'لا توجد أحداث مطابقة',timeUnknown:'الوقت غير متاح',magnitude:'القوة',depth:'العمق',
       latitude:'خط العرض',longitude:'خط الطول',reportedAt:'وقت التسجيل',place:'الموقع',details:'تفاصيل الحدث',selectEvent:'اختاري زلزالًا من الكرة الأرضية أو القائمة لعرض التفاصيل.',
-      globeHint:'اسحبي للتدوير · مرّري للتقريب · اضغطي على نقطة',globeStatus:'USGS · الزلازل المسجلة',recentActivity:'النشاط الحديث',
+      mapReset:'إعادة ضبط الخريطة',mapLatest:'أحدث زلزال',mapSelected:'الزلزال المختار',mapTapHint:'اضغطي على علامة ملونة أو اختاري زلزالًا من القائمة لعرض تفاصيله.',quickEvents:'اضغطي على زلزال لتحديد موقعه',globeHint:'اسحبي للتدوير · اضغطي على علامة ملونة لعرض تفاصيل الزلزال',globeStatus:'USGS · الزلازل المسجلة',recentActivity:'النشاط الحديث',
       earthTime:'ضوء الشمس الحقيقي · حسب التوقيت العالمي',quakeDots:'كل نقطة تمثل زلزالًا مسجلًا',quakeMild:'قوة ٢٫٥–٣٫٩',quakeMedium:'قوة ٤–٤٫٩',quakeStrong:'قوة ٥+',
       globeUnavailable:'الكرة ثلاثية الأبعاد غير متاحة حاليًا، لكن بيانات الأحداث ما زالت ظاهرة في القائمة.',eventWebsite:'فتح سجل USGS',
       magDistribution:'توزيع درجات القوة',magDistributionDesc:'عدد الأحداث في كل فئة',dailyCounts:'النشاط حسب الوقت',dailyCountsDesc:'عدد الزلازل في كل فترة زمنية',
@@ -292,11 +292,48 @@
       <div><div class="details-key">${x(t('coordinates'))}</div><div class="details-value">${x(num(e.lat,2))}, ${x(num(e.lng,2))}</div></div></div>
       ${e.url?`<a class="secondary-btn small-btn" href="${x(e.url)}" target="_blank" rel="noopener noreferrer">${x(t('eventWebsite'))}${icon('external')}</a>`:''}`;
   }
+  function recentQuakesShortcuts(rows) {
+    const cards=rows.slice(0,6).map(e=>`<button type="button" class="quake-shortcut${state.selected?.id===e.id?' is-selected':''}" data-event-id="${x(e.id)}" aria-label="${x(t('magnitude')+' '+num(e.mag,1)+' · '+e.place)}"><span class="shortcut-mag">${x(num(e.mag,1))}</span><span class="shortcut-text" dir="auto">${x(e.place)}</span><small>${x(relativeTime(e.time))}</small></button>`).join('');
+    return `<section class="quake-shortcuts-wrap" aria-label="${x(t('quickEvents'))}"><div class="shortcut-heading">${icon('target')}${x(t('quickEvents'))}</div><div class="quake-shortcuts">${cards||`<span class="selected-blank">${x(t('noEventsShort'))}</span>`}</div></section>`;
+  }
   function renderExplorer(){const rows=filtered(),r=rows[0]?regionOf(rows[0]):null;return `${sectionIntro('explorer')}${errorMessage()}${state.selectedRegion?`<div class="region-filter-tag">${x(t('shownArea'))}: <strong>${x(r?regionTitle(r):state.selectedRegion)}</strong> <button class="secondary-btn small-btn" data-action="clear-region">${x(t('clearLocation'))} ×</button></div>`:''}${selectionToolbar()}
-    <div class="explorer-grid"><section class="card globe-card"><div class="globe-card-title">${x(t('globeStatus'))}</div>${globeMarkup('explorerGlobe',false)}<div class="globe-sun-note">${icon('sun')}${x(t('earthTime'))}</div>${quakeLegend()}<div class="globe-control-hint">${x(t('globeHint'))}</div></section>
-    <div class="explorer-side"><section class="card selected-card"><div class="card-title">${x(t('details'))}</div><div id="selectedEvent">${selectedMarkup()}</div></section>
-    <section class="card section-card"><div class="card-header"><div><div class="card-title">${x(t('recentActivity'))}</div><div class="card-subtitle">${x(t('results'))}: ${num(rows.length)}</div></div></div><div class="event-scroll">${eventsList(rows,40)}</div></section></div></div>
+    ${recentQuakesShortcuts(rows)}
+    <div class="explorer-grid"><section class="card globe-card"><div class="globe-card-title">${x(t('globeStatus'))}</div>${globeMarkup('explorerGlobe',false)}
+      <div class="globe-map-actions"><button type="button" data-action="focus-latest" class="globe-map-action">${icon('target')}${x(t('mapLatest'))}</button><button type="button" data-action="reset-globe" class="globe-map-action">${icon('refresh')}${x(t('mapReset'))}</button></div>
+      <div id="globeEventPreview" class="globe-event-preview" hidden></div>
+      <div class="globe-sun-note">${icon('sun')}${x(t('earthTime'))}</div>${quakeLegend()}<div class="globe-control-hint">${x(t('mapTapHint'))}</div></section>
+    <div class="explorer-side">
+    <section class="card section-card"><div class="card-header"><div><div class="card-title">${x(t('recentActivity'))}</div><div class="card-subtitle">${x(t('results'))}: ${num(rows.length)}</div></div></div><div class="event-scroll">${eventsList(rows,40)}</div></section>
+    <section class="card selected-card" id="earthquakeDetails"><div class="card-title">${x(t('details'))}</div><div id="selectedEvent">${selectedMarkup()}</div></section></div></div>
     ${disclaimer()}`;}
+  function showSelectedEvent(e,moveCamera=false) {
+    state.selected=e;
+    if(state.page!=='explorer'){openModal(e);return;}
+    const details=$('#selectedEvent');
+    if(details){details.innerHTML=selectedMarkup();iconHTML();}
+    document.querySelectorAll('.quake-shortcut,.event-row').forEach(el=>el.classList.toggle('is-selected',el.dataset.eventId===e.id));
+    const preview=$('#globeEventPreview');
+    if(preview){
+      preview.hidden=false;
+      preview.innerHTML=`<div><small>${x(t('mapSelected'))} · M${x(num(e.mag,1))}</small><strong dir="auto">${x(e.place)}</strong></div><button type="button" data-action="show-event-details">${x(t('details'))} ↗</button>`;
+    }
+    if(globe&&moveCamera){
+      const globeMount=$('#explorerGlobe');
+      const mobile=globeMount&&globeMount.clientWidth<700;
+      globe.controls().autoRotate=false;
+      globe.pointOfView({lat:e.lat,lng:e.lng,altitude:mobile?3.2:2.25},700);
+    }
+  }
+  function resetEarthView(focusLatest=false) {
+    if(!globe||state.page!=='explorer')return;
+    const globeMount=$('#explorerGlobe');
+    const mobile=globeMount&&globeMount.clientWidth<700;
+    const events=filtered();
+    const target=events.length&&(focusLatest||state.selectedRegion)?events[0]:null;
+    globe.controls().autoRotate=false;
+    globe.pointOfView(target?{lat:target.lat,lng:target.lng,altitude:mobile?3.2:2.25}:{lat:20,lng:135,altitude:mobile?3.35:2.5},650);
+    if(focusLatest&&target)showSelectedEvent(target,false);
+  }
   function renderAnalytics(){const rows=filtered(),s=stats(rows);return `${sectionIntro('analytics')}${errorMessage()}${selectionToolbar()}
   <div class="insight-row"><div class="card insight-card"><span class="card-subtitle">${x(t('detectedEvents'))}</span><strong>${num(s.total)}</strong><small>${x(t('statSource'))}</small></div>
   <div class="card insight-card"><span class="card-subtitle">${x(t('strongEvents'))}</span><strong>${num(s.large)}</strong><small>${x(t('statSource'))}</small></div>
