@@ -414,6 +414,45 @@
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#0d2639',padding:11,displayColors:false}},scales:{x:{grid:{display:false},border:{display:false},ticks:{color:s.text,font:{size:10}}},y:{beginAtZero:true,grid:{color:s.grid},border:{display:false},ticks:{precision:0,color:s.text,font:{size:10}}}}}});
     chartInstances.push(c);
   }
+  function markerForEarthquake(e) {
+    const button=document.createElement('button');
+    button.type='button';
+    button.className='quake-tap-point '+magClass(e.mag);
+    button.textContent=e.mag.toFixed(1);
+    button.title=e.place+' · M'+e.mag.toFixed(1);
+    button.setAttribute('aria-label',t('magnitude')+' '+num(e.mag,1)+' · '+e.place);
+    button.style.pointerEvents='auto';
+    button.addEventListener('pointerdown',event=>event.stopPropagation());
+    button.addEventListener('touchstart',event=>event.stopPropagation(),{passive:true});
+    button.addEventListener('click',event=>{
+      event.preventDefault();event.stopPropagation();
+      showSelectedEvent(e,false);
+    });
+    return button;
+  }
+  function accessibleMarkers(entries) {
+    const list=[];
+    const used=new Set();
+    const preferred=[...entries.slice(0,100),...entries.filter(e=>e.mag>=4.5)];
+    for(const e of preferred){
+      const key=Math.round(e.lat/2.2)+':'+Math.round(e.lng/2.2);
+      if(used.has(key))continue;
+      used.add(key);list.push(e);
+      if(list.length>=72)break;
+    }
+    return list;
+  }
+  function closestGlobeEvent(location,entries) {
+    const phi=location.lat*Math.PI/180,lambda=location.lng*Math.PI/180;
+    let nearest=null,angle=Infinity;
+    for(const e of entries){
+      const lat=e.lat*Math.PI/180,lng=e.lng*Math.PI/180;
+      const hav=Math.sin((lat-phi)/2)**2+Math.cos(lat)*Math.cos(phi)*Math.sin((lng-lambda)/2)**2;
+      const distance=2*Math.asin(Math.min(1,Math.sqrt(Math.max(0,hav))))*180/Math.PI;
+      if(distance<angle){nearest=e;angle=distance;}
+    }
+    return angle<=2.4?nearest:null;
+  }
   function attachGlobe(selector,hero) {
     const el=document.getElementById(selector);if(!el)return;
     if(typeof window.Globe!=='function'){if(!hero){const caption=document.createElement('div');caption.className='globe-control-hint';caption.style.bottom='60px';caption.textContent=t('globeUnavailable');el.appendChild(caption);}return;}
@@ -426,16 +465,23 @@
         .backgroundColor('rgba(0,0,0,0)')
         .showAtmosphere(true).atmosphereColor('#6ac3e1').atmosphereAltitude(.17)
         .pointsData(entries).pointLat(e=>e.lat).pointLng(e=>e.lng)
-        .pointAltitude(.0015).pointRadius(e=>e.mag>=5?.31:e.mag>=4?.25:.19)
+        .pointAltitude(.008).pointRadius(e=>e.mag>=5?1.0:e.mag>=4?.82:.7)
         .pointColor(e=>magColor(e.mag))
         .pointLabel(e=>`${x(e.place)} · M${x(e.mag.toFixed(1))}`)
         .pointResolution(12).pointsMerge(false)
-        .onPointClick(e=>{state.selected=e;if(state.page==='explorer'){$('#selectedEvent').innerHTML=selectedMarkup();iconHTML();}else{openModal(e);}});
+        .onPointClick(e=>showSelectedEvent(e,false))
+        .onGlobeClick(location=>{if(!hero){const e=closestGlobeEvent(location,entries);if(e)showSelectedEvent(e,false);}});
       globe.width(el.clientWidth).height(el.clientHeight);
-      const focus=(!hero&&state.selectedRegion&&entries.length)?entries[0]:null;
-      globe.pointOfView(focus?{lat:focus.lat,lng:focus.lng,altitude:1.55}:{lat:23,lng:49,altitude:hero?2.15:2.1},0);
-      const controls=globe.controls();controls.autoRotate=true;controls.autoRotateSpeed=hero?.3:.18;controls.enableZoom=true;
-      if(hero)controls.enableZoom=false;
+      if(!hero&&typeof globe.htmlElementsData==='function'){
+        // Real HTML buttons make touches reliable on Safari, even when WebGL hit targets are tiny.
+        globe.htmlElementsData(accessibleMarkers(entries))
+          .htmlLat(e=>e.lat).htmlLng(e=>e.lng).htmlAltitude(.021)
+          .htmlElement(e=>markerForEarthquake(e)).htmlTransitionDuration(0);
+      }
+      const mobile=el.clientWidth<700;
+      const focus=!hero&&entries.length?entries[0]:null;
+      globe.pointOfView(focus?{lat:focus.lat,lng:focus.lng,altitude:mobile?3.25:2.45}:{lat:20,lng:135,altitude:hero?2.15:mobile?3.35:2.5},0);
+      const controls=globe.controls();controls.autoRotate=hero;controls.autoRotateSpeed=.12;controls.enableZoom=!hero;controls.enablePan=false;
       const fallback=el.querySelector('.globe-fallback');if(fallback)fallback.remove();
       if('ResizeObserver' in window){globeObserver=new ResizeObserver(()=>{if(globe&&el.isConnected)globe.width(el.clientWidth).height(el.clientHeight);});globeObserver.observe(el);}
       const activeGlobe=globe;
@@ -482,10 +528,9 @@
     if(evt.target.id==='modalHost'){closeModal();return;}
     const selectedPlace=evt.target.closest('[data-region]');if(selectedPlace){state.selectedRegion=selectedPlace.dataset.region;state.search='';navigate('explorer');return;}
     const nav=evt.target.closest('[data-nav]');if(nav){evt.preventDefault();navigate(nav.dataset.nav);return;}
-    const eventBtn=evt.target.closest('[data-event-id]');if(eventBtn){const event=filtered().find(o=>o.id===eventBtn.dataset.eventId);if(event){state.selected=event;openModal(event);
-      if(globe && state.page==='explorer')globe.pointOfView({lat:event.lat,lng:event.lng,altitude:1.4},850);}return;}
+    const eventBtn=evt.target.closest('[data-event-id]');if(eventBtn){const event=filtered().find(o=>o.id===eventBtn.dataset.eventId);if(event){if(state.page==='explorer')showSelectedEvent(event,true);else openModal(event);}return;}
     const action=evt.target.closest('[data-action]');if(!action)return;
-    switch(action.dataset.action){case 'clear-region':state.selectedRegion=null;state.search='';render();break;case 'refresh':loadData(true);break;case 'compare-retry':loadCompare();break;
+    switch(action.dataset.action){case 'focus-latest':resetEarthView(true);break;case 'reset-globe':resetEarthView(false);break;case 'show-event-details':if(state.selected)openModal(state.selected);break;case 'clear-region':state.selectedRegion=null;state.search='';render();break;case 'refresh':loadData(true);break;case 'compare-retry':loadCompare();break;
       case 'close-modal':closeModal();break;case 'csv':downloadCsv();break;case 'print':window.print();break;}
   });
   document.addEventListener('change',evt=>{
