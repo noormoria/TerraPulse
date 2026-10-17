@@ -39,8 +39,9 @@
   const tr = {
     en: {
       recentPlacesTitle:'Where were the latest earthquakes?',recentPlacesDesc:'Choose a country or USGS-reported region to see its events on the globe.',countryKind:'Country',areaKind:'USGS area',lastRecorded:'Last reported',placesFromSource:'Countries are identified by map boundaries. Offshore events are listed as USGS regions.',openArea:'Explore this location',clearLocation:'All locations',shownArea:'Viewing location',globeSectionTitle:'Explore the Earth',globeSectionDesc:'Colored dots are reported earthquakes. Tap any dot to see the recorded magnitude, time and depth.',
+      homeEyebrow:'DISCOVER EARTH THROUGH DATA',homeTitleFirst:'See where earthquakes',homeTitleSecond:'happen around the world.',homeDescription:'Explore recently reported earthquakes on an interactive globe. Select a location to learn when it occurred, how strong it was and how deep it was.',homeStart:'Explore earthquakes',homeDashboard:'Go to dashboard',homeTrust:'Reported earthquake data from USGS',homeLearnTitle:'How TerraPulse works',homeLearnDescription:'Three simple steps. No technical knowledge needed.',homeStepOneTitle:'Explore',homeStepOneDesc:'Open the globe and choose an earthquake location.',homeStepTwoTitle:'Discover',homeStepTwoDesc:'View the recorded magnitude, time and depth.',homeStepThreeTitle:'Understand',homeStepThreeDesc:'Visit the dashboard for a simple overview, or explore detailed analysis.',homeSafety:'This platform displays recorded observations; it does not predict earthquakes.',
       dashboardPlaces:'Locations with reports',dashboardLatest:'Latest earthquake',dashboardGoToMap:'View on map',dashboardWorld:'Interactive Earth',dashboardMapHint:'Tap a colored point to view an earthquake report.',dashboardFullMap:'Open full map',dashboardTrend:'Activity trend',dashboardTrendNote:'Number of earthquakes in this period',dashboardRecent:'Recent events',dashboardUpdated:'Source updated',dashboardNoData:'Current USGS data is unavailable.',
-      workspace:'WORKSPACE',overview:'Dashboard',explorer:'Live Explorer',analytics:'Analytics',compare:'Compare',reports:'Reports',
+      workspace:'START HERE',home:'Home',advancedTools:'More tools',overview:'Dashboard',explorer:'Explore earthquakes',analytics:'Analytics',compare:'Compare',reports:'Reports',
       dataSource:'USGS data feed',sourceFoot:'Official reported earthquakes. Not predictions.',viewSource:'View data source',platform:'Platform',
       feedStatus:'USGS FEED',footerTag:'Data informs, it does not predict.',footerSource:'Source: USGS Earthquake Hazards Program',
       heroTag:'GLOBAL SEISMIC INTELLIGENCE',heroLine1:'The planet,',heroLine2:'in perspective.',heroDesc:'Explore earthquakes around the world through verified data and a living 3D globe.',
@@ -82,8 +83,9 @@
     },
     ar: {
       recentPlacesTitle:'أين سُجلت أحدث الزلازل؟',recentPlacesDesc:'اختاري دولة أو منطقة لعرض الزلازل المسجلة فيها على الكرة الأرضية.',countryKind:'دولة',areaKind:'منطقة بحسب USGS',lastRecorded:'آخر زلزال',placesFromSource:'تُحدد الدول باستخدام حدودها الجغرافية؛ وتُعرض الزلازل البحرية بحسب المناطق المذكورة في USGS.',openArea:'استكشاف الموقع',clearLocation:'كل المواقع',shownArea:'الموقع المحدد',globeSectionTitle:'استكشفي الأرض',globeSectionDesc:'النقاط الملونة هي زلازل مسجلة. اضغطي على النقطة لمعرفة القوة والوقت والعمق.',
+      homeEyebrow:'اكتشف الأرض من خلال البيانات',homeTitleFirst:'اكتشف أين تحدث',homeTitleSecond:'الزلازل حول العالم.',homeDescription:'استكشف الزلازل المسجلة حديثًا على كرة أرضية تفاعلية، واختر أي موقع لمعرفة قوة الزلزال ووقته وعمقه.',homeStart:'ابدأ استكشاف الزلازل',homeDashboard:'عرض لوحة المعلومات',homeTrust:'بيانات الزلازل المسجلة من USGS',homeLearnTitle:'كيف تستخدم TerraPulse؟',homeLearnDescription:'ثلاث خطوات بسيطة دون الحاجة لمعرفة تقنية.',homeStepOneTitle:'استكشف',homeStepOneDesc:'افتح الخريطة واختر أحد مواقع الزلازل.',homeStepTwoTitle:'تعرّف',homeStepTwoDesc:'شاهد القوة والوقت والعمق المسجل للزلزال.',homeStepThreeTitle:'افهم',homeStepThreeDesc:'انتقل إلى لوحة المعلومات لملخص واضح، أو استعرض التحليلات التفصيلية.',homeSafety:'تعرض المنصة أحداثًا مسجلة ولا تتنبأ بالزلازل.',
       dashboardPlaces:'المناطق المسجلة',dashboardLatest:'أحدث زلزال',dashboardGoToMap:'عرض على الخريطة',dashboardWorld:'الكرة الأرضية التفاعلية',dashboardMapHint:'اضغطي على نقطة ملونة لمشاهدة بيانات الزلزال.',dashboardFullMap:'افتحي الخريطة الكاملة',dashboardTrend:'النشاط عبر الوقت',dashboardTrendNote:'عدد الزلازل خلال الفترة المختارة',dashboardRecent:'آخر الزلازل',dashboardUpdated:'آخر تحديث من المصدر',dashboardNoData:'تعذر تحميل بيانات USGS الحالية.',
-      workspace:'مساحة العمل',overview:'لوحة المعلومات',explorer:'استكشاف مباشر',analytics:'التحليلات',compare:'المقارنة',reports:'التقارير',
+      workspace:'ابدأ هنا',home:'الرئيسية',advancedTools:'المزيد من الأدوات',overview:'لوحة المعلومات',explorer:'استكشاف الزلازل',analytics:'التحليلات',compare:'المقارنة',reports:'التقارير',
       dataSource:'بيانات هيئة USGS',sourceFoot:'زلازل مسجلة رسميًا، وليست تنبؤات.',viewSource:'عرض مصدر البيانات',platform:'المنصة',
       feedStatus:'بيانات USGS',footerTag:'البيانات تُفسّر الواقع ولا تتنبأ به.',footerSource:'المصدر: هيئة المسح الجيولوجي الأمريكية USGS',
       heroTag:'تحليلات النشاط الزلزالي العالمي',heroLine1:'استكشف الكوكب',heroLine2:'من منظور البيانات.',heroDesc:'تابع الزلازل المسجلة حول العالم باستخدام بيانات موثوقة وكرة أرضية تفاعلية ثلاثية الأبعاد.',
@@ -130,7 +132,7 @@
   const state = {
     lang: safeStorage('tp-lang') === 'ar' ? 'ar' : 'en',
     theme: safeStorage('tp-theme') === 'light' ? 'light' : 'dark',
-    page: ['overview','explorer','analytics','compare','reports'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview',
+    page: ['home','overview','explorer','analytics','compare','reports'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home',
     period:'day', minMag:'2.5', search:'', selectedRegion:null, data:[], generated:null, loading:true, error:false,
     selected:null, compareData:null, compareLoading:false, compareError:false
   };
@@ -216,6 +218,8 @@
     $('#year').textContent=new Date().getFullYear();
     document.querySelectorAll('[data-nav]').forEach(el=>{el.classList.toggle('active',el.dataset.nav===state.page);if(el.classList.contains('nav-link')){el.setAttribute('aria-current',el.dataset.nav===state.page?'page':'false');}});
     document.querySelectorAll('.nav-link').forEach(el=>el.style.direction=state.lang==='ar'?'rtl':'ltr');
+    const advancedNav=document.getElementById('advancedNav');
+    if(advancedNav && ['analytics','compare','reports'].includes(state.page))advancedNav.open=true;
     document.querySelector('.status-line .live-dot').style.background=state.error?'#ed8998':'#46deb6';
     const intelligenceNav=document.getElementById('dataIntelligenceNav');
     if(intelligenceNav) intelligenceNav.textContent=state.lang==='ar'?'ذكاء البيانات':'Data Intelligence';
@@ -271,6 +275,47 @@
       '<div class="recent-panel-top"><div><span class="eyebrow">USGS · '+x(t(state.period))+'</span><h2>'+x(t('recentPlacesTitle'))+'</h2><p>'+x(t('recentPlacesDesc'))+'</p></div><span class="source-pill"><span class="live-dot"></span> USGS</span></div>'+
       '<div class="recent-places-list">'+cards+'</div>'+
       '<p class="recent-panel-foot">'+x(t('placesFromSource'))+'</p></section>';
+  }
+  function renderHome() {
+    const steps=[
+      ['globe',t('homeStepOneTitle'),t('homeStepOneDesc')],
+      ['target',t('homeStepTwoTitle'),t('homeStepTwoDesc')],
+      ['chart',t('homeStepThreeTitle'),t('homeStepThreeDesc')]
+    ];
+    return `<div class="welcome-page">
+      <section class="welcome-hero">
+        <div class="welcome-copy ${state.lang==='ar'?'text-rtl':''}">
+          <span class="welcome-eyebrow">${icon('globe')}${x(t('homeEyebrow'))}</span>
+          <h1>${x(t('homeTitleFirst'))}<span>${x(t('homeTitleSecond'))}</span></h1>
+          <p class="welcome-description">${x(t('homeDescription'))}</p>
+          <div class="welcome-actions">
+            <button type="button" class="welcome-start" data-nav="explorer">${x(t('homeStart'))}${icon('arrow')}</button>
+            <button type="button" class="welcome-secondary" data-nav="overview">${x(t('homeDashboard'))}${icon('arrow')}</button>
+          </div>
+          <p class="welcome-source">${icon('check')}${x(t('homeTrust'))}</p>
+        </div>
+        <div class="welcome-art" aria-hidden="true">
+          <div class="welcome-orbit welcome-orbit-a"></div>
+          <div class="welcome-orbit welcome-orbit-b"></div>
+          <img src="assets/fallback-earth.svg" alt="" loading="eager" width="540" height="540" />
+          <div class="welcome-art-glow"></div>
+        </div>
+      </section>
+      <section class="welcome-how">
+        <div class="welcome-how-heading ${state.lang==='ar'?'text-rtl':''}">
+          <span class="eyebrow">01 — 02 — 03</span>
+          <h2>${x(t('homeLearnTitle'))}</h2><p>${x(t('homeLearnDescription'))}</p>
+        </div>
+        <div class="welcome-steps">
+          ${steps.map(([symbol,title,description],i)=>`<div class="welcome-step ${state.lang==='ar'?'text-rtl':''}">
+            <span class="welcome-step-number">0${i+1}</span>
+            <div class="welcome-step-icon">${icon(symbol)}</div>
+            <h3>${x(title)}</h3><p>${x(description)}</p>
+          </div>`).join('')}
+        </div>
+        <p class="welcome-safety">${icon('info')}${x(t('homeSafety'))}</p>
+      </section>
+    </div>`;
   }
   function dashboardKpis(rows) {
     const missing=state.error&&!rows.length;
@@ -506,6 +551,7 @@
     }catch(err){console.warn('Globe renderer unavailable:',err);globe=null;}
   }
   function render(){teardownVisuals();applyShell();const main=$('#main');
+    if(state.page==='home'){main.innerHTML=renderHome();return;}
     if(state.loading){main.innerHTML=`${sectionIntro(state.page)}<div class="loading-state"><span class="spinner" role="status"></span>${x(t('loading'))}</div>`;return;}
     switch(state.page){case 'overview':main.innerHTML=renderOverview();break;case 'explorer':main.innerHTML=renderExplorer();break;
       case 'analytics':main.innerHTML=renderAnalytics();break;case 'compare':main.innerHTML=renderCompare();break;case 'reports':main.innerHTML=renderReports();break;}
@@ -513,7 +559,7 @@
     if(state.page==='explorer')attachGlobe('explorerGlobe',false);
     if(state.page==='analytics'){chartLine('timelineChart',filtered());chartMags('magnitudeChart',filtered());}
   }
-  function navigate(page){if(!['overview','explorer','analytics','compare','reports'].includes(page))return;
+  function navigate(page){if(!['home','overview','explorer','analytics','compare','reports'].includes(page))return;
     state.page=page;state.selected=null;history.replaceState(null,'',`#${page}`);closeSidebar();closeModal();
     if(page==='overview')state.selectedRegion=null;
     if(page==='compare' && (!state.compareData || state.compareError)){loadCompare();}else render();
