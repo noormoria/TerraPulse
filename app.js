@@ -561,7 +561,7 @@
   }
   function navigate(page){if(!['home','overview','explorer','analytics','compare','reports'].includes(page))return;
     state.page=page;state.selected=null;history.replaceState(null,'',`#${page}`);closeSidebar();closeModal();
-    if(page==='overview')state.selectedRegion=null;
+    if(page==='home'||page==='overview'){state.selectedRegion=null;state.search='';}
     if(page==='compare' && (!state.compareData || state.compareError)){loadCompare();}else render();
     window.scrollTo({top:0,behavior:'auto'});
   }
