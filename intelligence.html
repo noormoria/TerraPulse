@@ -7,7 +7,7 @@
   <meta name="description" content="TerraPulse historical geospatial data science: real USGS dataset, DBSCAN earthquake clusters and unusual-activity analysis." />
   <title>TerraPulse · Data Intelligence</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=welcome-v1" />
   <link rel="stylesheet" href="intelligence.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
   <script src="intelligence.js" defer></script>
@@ -15,19 +15,25 @@
 <body data-theme="dark">
   <div class="site-shell">
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-      <a class="brand" href="index.html#overview" aria-label="TerraPulse home">
+      <a class="brand" href="index.html#home" aria-label="TerraPulse home">
         <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="2"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="currentColor" stroke-width="1.7" transform="rotate(-35 20 20)"/><circle cx="32.3" cy="10.8" r="3.3" fill="#52E6D0"/></svg></span>
         <span><strong>TerraPulse</strong><small>EARTH INTELLIGENCE</small></span>
       </a>
-      <div class="sidebar-section"><div class="nav-label" id="workspaceText">WORKSPACE</div>
-        <nav class="nav-list" aria-label="TerraPulse sections">
-          <a class="nav-link" href="index.html#overview"><span class="ni">◫</span><span data-key="overview">Overview</span></a>
-          <a class="nav-link" href="index.html#explorer"><span class="ni">◎</span><span data-key="explorer">Live Explorer</span></a>
-          <a class="nav-link" href="index.html#analytics"><span class="ni">⌁</span><span data-key="analytics">Analytics</span></a>
-          <a class="nav-link active" href="intelligence.html" aria-current="page"><span class="ni">✧</span><span data-key="intelligence">Data Intelligence</span></a>
-          <a class="nav-link" href="index.html#compare"><span class="ni">▤</span><span data-key="compare">Compare</span></a>
-          <a class="nav-link" href="index.html#reports"><span class="ni">▣</span><span data-key="reports">Reports</span></a>
+      <div class="sidebar-section"><div class="nav-label" id="workspaceText">START HERE</div>
+        <nav class="nav-list" aria-label="Main pages">
+          <a class="nav-link" href="index.html#home"><span class="ni">◎</span><span data-key="home">Home</span></a>
+          <a class="nav-link" href="index.html#explorer"><span class="ni">◉</span><span data-key="explorer">Explore earthquakes</span></a>
+          <a class="nav-link" href="index.html#overview"><span class="ni">▦</span><span data-key="overview">Dashboard</span></a>
         </nav>
+        <details class="advanced-navigation" id="advancedNav" open>
+          <summary><span class="ni">◇</span><span data-key="advancedTools">More tools</span><span class="advanced-chevron" aria-hidden="true">⌄</span></summary>
+          <nav class="nav-list" aria-label="Advanced tools">
+            <a class="nav-link" href="index.html#analytics"><span class="ni">⌁</span><span data-key="analytics">Analytics</span></a>
+            <a class="nav-link active" href="intelligence.html" aria-current="page"><span class="ni">✧</span><span data-key="intelligence">Data Intelligence</span></a>
+            <a class="nav-link" href="index.html#compare"><span class="ni">▤</span><span data-key="compare">Compare</span></a>
+            <a class="nav-link" href="index.html#reports"><span class="ni">▣</span><span data-key="reports">Reports</span></a>
+          </nav>
+        </details>
       </div>
       <div class="sidebar-bottom"><div class="status-panel"><span class="status-line"><span class="live-dot"></span><span data-key="catalog">USGS historical catalog</span></span><small data-key="notPredictions">Observed data, not earthquake forecasts.</small></div>
         <a class="source-link" href="https://earthquake.usgs.gov/fdsnws/event/1/" target="_blank" rel="noopener noreferrer"><span class="ni">↗</span><span data-key="source">Data source</span></a>
