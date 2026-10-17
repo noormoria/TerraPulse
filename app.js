@@ -39,12 +39,13 @@
   const tr = {
     en: {
       recentPlacesTitle:'Where were the latest earthquakes?',recentPlacesDesc:'Choose a country or USGS-reported region to see its events on the globe.',countryKind:'Country',areaKind:'USGS area',lastRecorded:'Last reported',placesFromSource:'Countries are identified by map boundaries. Offshore events are listed as USGS regions.',openArea:'Explore this location',clearLocation:'All locations',shownArea:'Viewing location',globeSectionTitle:'Explore the Earth',globeSectionDesc:'Colored dots are reported earthquakes. Tap any dot to see the recorded magnitude, time and depth.',
-      workspace:'WORKSPACE',overview:'Overview',explorer:'Live Explorer',analytics:'Analytics',compare:'Compare',reports:'Reports',
+      dashboardPlaces:'Locations with reports',dashboardLatest:'Latest earthquake',dashboardGoToMap:'View on map',dashboardWorld:'Interactive Earth',dashboardMapHint:'Tap a colored point to view an earthquake report.',dashboardFullMap:'Open full map',dashboardTrend:'Activity trend',dashboardTrendNote:'Number of earthquakes in this period',dashboardRecent:'Recent events',dashboardUpdated:'Source updated',dashboardNoData:'Current USGS data is unavailable.',
+      workspace:'WORKSPACE',overview:'Dashboard',explorer:'Live Explorer',analytics:'Analytics',compare:'Compare',reports:'Reports',
       dataSource:'USGS data feed',sourceFoot:'Official reported earthquakes. Not predictions.',viewSource:'View data source',platform:'Platform',
       feedStatus:'USGS FEED',footerTag:'Data informs, it does not predict.',footerSource:'Source: USGS Earthquake Hazards Program',
       heroTag:'GLOBAL SEISMIC INTELLIGENCE',heroLine1:'The planet,',heroLine2:'in perspective.',heroDesc:'Explore earthquakes around the world through verified data and a living 3D globe.',
       exploreWorld:'Explore the globe',viewAnalytics:'View analytics',threeD:'INTERACTIVE 3D EARTH',
-      overviewEyebrow:'LATEST RECORDED EARTHQUAKES',overviewTitle:'Earthquakes around the world',overviewDesc:'See where earthquakes were reported most recently. Select a country or area to view the actual events on the globe.',
+      overviewEyebrow:'USGS EARTHQUAKE REPORTS',overviewTitle:'Earthquake Dashboard',overviewDesc:'A clear overview of recently reported earthquakes. Select a location to explore the events.',
       explorerEyebrow:'EARTHQUAKE MAP',explorerTitle:'View earthquakes on the globe',explorerDesc:'Each colored dot is a recorded earthquake. Select it for the magnitude, depth and reported time.',
       analyticsEyebrow:'EXPLORE THE NUMBERS',analyticsTitle:'Seismic activity, decoded',analyticsDesc:'Explore descriptive trends from the selected USGS dataset, not earthquake forecasts.',
       compareEyebrow:'TIME-BASED COMPARISON',compareTitle:'Measure what changed',compareDesc:'Compare earthquakes recorded in the latest 24-hour window with the 24 hours before it.',
@@ -81,12 +82,13 @@
     },
     ar: {
       recentPlacesTitle:'أين سُجلت أحدث الزلازل؟',recentPlacesDesc:'اختاري دولة أو منطقة لعرض الزلازل المسجلة فيها على الكرة الأرضية.',countryKind:'دولة',areaKind:'منطقة بحسب USGS',lastRecorded:'آخر زلزال',placesFromSource:'تُحدد الدول باستخدام حدودها الجغرافية؛ وتُعرض الزلازل البحرية بحسب المناطق المذكورة في USGS.',openArea:'استكشاف الموقع',clearLocation:'كل المواقع',shownArea:'الموقع المحدد',globeSectionTitle:'استكشفي الأرض',globeSectionDesc:'النقاط الملونة هي زلازل مسجلة. اضغطي على النقطة لمعرفة القوة والوقت والعمق.',
-      workspace:'مساحة العمل',overview:'نظرة عامة',explorer:'استكشاف مباشر',analytics:'التحليلات',compare:'المقارنة',reports:'التقارير',
+      dashboardPlaces:'المناطق المسجلة',dashboardLatest:'أحدث زلزال',dashboardGoToMap:'عرض على الخريطة',dashboardWorld:'الكرة الأرضية التفاعلية',dashboardMapHint:'اضغطي على نقطة ملونة لمشاهدة بيانات الزلزال.',dashboardFullMap:'افتحي الخريطة الكاملة',dashboardTrend:'النشاط عبر الوقت',dashboardTrendNote:'عدد الزلازل خلال الفترة المختارة',dashboardRecent:'آخر الزلازل',dashboardUpdated:'آخر تحديث من المصدر',dashboardNoData:'تعذر تحميل بيانات USGS الحالية.',
+      workspace:'مساحة العمل',overview:'لوحة المعلومات',explorer:'استكشاف مباشر',analytics:'التحليلات',compare:'المقارنة',reports:'التقارير',
       dataSource:'بيانات هيئة USGS',sourceFoot:'زلازل مسجلة رسميًا، وليست تنبؤات.',viewSource:'عرض مصدر البيانات',platform:'المنصة',
       feedStatus:'بيانات USGS',footerTag:'البيانات تُفسّر الواقع ولا تتنبأ به.',footerSource:'المصدر: هيئة المسح الجيولوجي الأمريكية USGS',
       heroTag:'تحليلات النشاط الزلزالي العالمي',heroLine1:'استكشف الكوكب',heroLine2:'من منظور البيانات.',heroDesc:'تابع الزلازل المسجلة حول العالم باستخدام بيانات موثوقة وكرة أرضية تفاعلية ثلاثية الأبعاد.',
       exploreWorld:'استكشف الكرة الأرضية',viewAnalytics:'عرض التحليلات',threeD:'أرض تفاعلية ثلاثية الأبعاد',
-      overviewEyebrow:'أحدث الزلازل المسجلة',overviewTitle:'الزلازل حول العالم',overviewDesc:'تعرفي على أماكن أحدث الزلازل المسجلة رسميًا، ثم اختاري دولة أو منطقة لمشاهدة تفاصيلها على الكرة الأرضية.',
+      overviewEyebrow:'بيانات الزلازل من USGS',overviewTitle:'لوحة متابعة الزلازل',overviewDesc:'ملخص واضح لأحدث الزلازل المسجلة. اختاري دولة أو منطقة لمشاهدة تفاصيلها على الخريطة.',
       explorerEyebrow:'خريطة الزلازل',explorerTitle:'شاهدي الزلازل على الخريطة',explorerDesc:'كل نقطة ملونة تمثل زلزالًا مسجلًا. اضغطي عليها لمعرفة قوته وعمقه ووقت تسجيله.',
       analyticsEyebrow:'تحليل الأرقام',analyticsTitle:'افهم النشاط الزلزالي',analyticsDesc:'حلّل أنماط البيانات المسجلة في الفترة المختارة، دون تقديم تنبؤات بالزلازل.',
       compareEyebrow:'مقارنة زمنية',compareTitle:'ما الذي تغيّر؟',compareDesc:'قارن أحداث آخر 24 ساعة بالأحداث المسجلة خلال الـ24 ساعة التي سبقتها.',
@@ -258,7 +260,7 @@
       if(e.time>g.last.time)g.last=e;
       g.highest=Math.max(g.highest,e.mag);
     }
-    const places=[...grouped.values()].sort((a,b)=>b.last.time-a.last.time).slice(0,8);
+    const places=[...grouped.values()].sort((a,b)=>b.last.time-a.last.time).slice(0,6);
     const cards=places.length?places.map((g,i)=>'<button class="recent-place" type="button" data-region="'+x(g.region.key)+'" aria-label="'+x(regionTitle(g.region)+': '+t('openArea'))+'">'+
       '<span class="recent-index">'+String(i+1).padStart(2,'0')+'</span>'+
       '<span class="recent-place-main"><strong dir="auto">'+x(regionTitle(g.region))+'</strong><small>'+x(t(g.region.kind==='country'?'countryKind':'areaKind'))+' · '+x(t('lastRecorded'))+' '+x(relativeTime(g.last.time))+'</small></span>'+
@@ -267,23 +269,36 @@
       '<span class="recent-arrow" aria-hidden="true">↗</span></button>').join(''):'<p class="selected-blank">'+x(t('noEventsShort'))+'</p>';
     return '<section class="recent-panel" aria-label="'+x(t('recentPlacesTitle'))+'">'+
       '<div class="recent-panel-top"><div><span class="eyebrow">USGS · '+x(t(state.period))+'</span><h2>'+x(t('recentPlacesTitle'))+'</h2><p>'+x(t('recentPlacesDesc'))+'</p></div><span class="source-pill"><span class="live-dot"></span> USGS</span></div>'+
-      selectionToolbar(false)+
       '<div class="recent-places-list">'+cards+'</div>'+
       '<p class="recent-panel-foot">'+x(t('placesFromSource'))+'</p></section>';
   }
-  function renderOverview(){
-    const rows=state.data,s=stats(rows);
-    return sectionIntro('overview')+errorMessage()+recentPlacesPanel()+
-      '<section class="hero home-globe-hero"><div class="hero-copy '+(state.lang==='ar'?'text-rtl':'')+'">'+
-      '<div class="hero-label"><span class="live-dot"></span>'+x(t('globeStatus'))+'</div>'+
-      '<h1>'+x(t('globeSectionTitle'))+'</h1><p>'+x(t('globeSectionDesc'))+'</p>'+
-      '<div class="hero-actions"><button class="primary-btn" data-nav="explorer">'+x(t('exploreWorld'))+icon('arrow')+'</button>'+
-      '<button class="ghost-btn" data-nav="analytics">'+x(t('viewAnalytics'))+'</button></div></div>'+
-      globeMarkup('heroGlobe',true)+'<span class="globe-overlay"></span></section>'+
-      '<div class="overview-mini-stats">'+
-      statCard('activity',t('totalEvents'),num(s.total),t('statSource'))+
-      statCard('alert',t('strongest'),s.strongest===null?'—':num(s.strongest,1),t('statStrong'))+
-      '</div>'+disclaimer();
+  function dashboardKpis(rows) {
+    const missing=state.error&&!rows.length;
+    const max=rows.length?Math.max(...rows.map(e=>e.mag)):null;
+    const places=missing?null:new Set(rows.map(e=>regionOf(e).key)).size;
+    const card=(ico,label,value,note)=>'<article class="dash-kpi"><span class="dash-kpi-label">'+icon(ico)+' '+x(label)+'</span><strong>'+x(value)+'</strong><small>'+x(note)+'</small></article>';
+    return '<div class="dash-kpis">'+
+      card('activity',t('totalEvents'),missing?'—':num(rows.length),t(state.period))+
+      card('alert',t('strongest'),max===null?'—':'M '+num(max,1),t('statStrong'))+
+      card('map',t('dashboardPlaces'),places===null?'—':num(places),t('dashboardPlaces'))+'</div>';
+  }
+  function renderOverview() {
+    const rows=state.data,e=rows[0];
+    const latest=e?'<div class="dash-latest-content"><div class="dash-latest-mag" style="--quake-color:'+magColor(e.mag)+'"><small>'+x(t('magnitude'))+'</small><strong>'+x(num(e.mag,1))+'</strong></div>'+
+      '<div class="dash-latest-copy"><strong dir="auto">'+x(e.place)+'</strong><span>'+x(dateString(e.time))+'</span><span>'+x(t('depth'))+': '+x(num(e.depth,1))+' '+x(t('depthUnit'))+'</span></div>'+
+      '<button type="button" class="primary-btn dash-latest-action" data-action="open-latest">'+x(t('dashboardGoToMap'))+' '+icon('arrow')+'</button></div>'
+      :'<p class="selected-blank">'+x(t(state.error?'dashboardNoData':'noEventsShort'))+'</p>';
+    const chart=rows.length?'<canvas id="overviewChart" role="img" aria-label="Reported earthquake counts over time"></canvas>':'<p class="selected-blank">'+x(t('noAnalytics'))+'</p>';
+    return sectionIntro('overview')+errorMessage()+
+      '<div class="dash-filter-line">'+selectionToolbar(false)+'<span class="dash-updated">'+icon('clock')+' '+x(t('dashboardUpdated'))+': '+x(state.generated?dateString(state.generated):t('unknown'))+'</span></div>'+
+      dashboardKpis(rows)+
+      '<div class="dash-layout"><div class="dash-primary">'+
+      '<section class="dash-highlight"><div class="dash-title"><span class="eyebrow">USGS · '+x(t(state.period))+'</span><h2>'+x(t('dashboardLatest'))+'</h2></div>'+latest+'</section>'+
+      recentPlacesPanel()+'</div>'+
+      '<section class="dash-globe-card"><div class="dash-title"><span class="eyebrow">GLOBAL · 3D</span><h2>'+x(t('dashboardWorld'))+'</h2><p>'+x(t('dashboardMapHint'))+'</p></div>'+
+      '<div class="dash-globe-space">'+globeMarkup('heroGlobe',true)+'</div><button type="button" class="dash-globe-action" data-nav="explorer">'+x(t('dashboardFullMap'))+' '+icon('arrow')+'</button></section></div>'+
+      '<div class="dash-lower"><section class="dash-trend-card"><div class="dash-title"><h2>'+x(t('dashboardTrend'))+'</h2><p>'+x(t('dashboardTrendNote'))+'</p></div><div class="dash-chart-space">'+chart+'</div></section>'+
+      '<section class="dash-events-card"><div class="dash-title"><h2>'+x(t('dashboardRecent'))+'</h2><p>'+x(t('latestEventsDesc'))+'</p></div><div class="dash-events-list">'+eventsList(rows,5)+'</div></section></div>'+disclaimer();
   }
   function selectedMarkup() {
     const e=state.selected;if(!e)return `<div class="selected-blank">${x(t('selectEvent'))}</div>`;
@@ -530,7 +545,7 @@
     const nav=evt.target.closest('[data-nav]');if(nav){evt.preventDefault();navigate(nav.dataset.nav);return;}
     const eventBtn=evt.target.closest('[data-event-id]');if(eventBtn){const event=filtered().find(o=>o.id===eventBtn.dataset.eventId);if(event){if(state.page==='explorer')showSelectedEvent(event,true);else openModal(event);}return;}
     const action=evt.target.closest('[data-action]');if(!action)return;
-    switch(action.dataset.action){case 'focus-latest':resetEarthView(true);break;case 'reset-globe':resetEarthView(false);break;case 'show-event-details':if(state.selected)openModal(state.selected);break;case 'clear-region':state.selectedRegion=null;state.search='';render();break;case 'refresh':loadData(true);break;case 'compare-retry':loadCompare();break;
+    switch(action.dataset.action){case 'open-latest':{const e=state.data[0];if(e){state.selectedRegion=null;state.search='';navigate('explorer');showSelectedEvent(e,true);}break;}case 'focus-latest':resetEarthView(true);break;case 'reset-globe':resetEarthView(false);break;case 'show-event-details':if(state.selected)openModal(state.selected);break;case 'clear-region':state.selectedRegion=null;state.search='';render();break;case 'refresh':loadData(true);break;case 'compare-retry':loadCompare();break;
       case 'close-modal':closeModal();break;case 'csv':downloadCsv();break;case 'print':window.print();break;}
   });
   document.addEventListener('change',evt=>{
