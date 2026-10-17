@@ -7,7 +7,7 @@
   const escapeHTML = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const dict = {
     en: {
-      workspace:'WORKSPACE',overview:'Overview',explorer:'Live Explorer',analytics:'Analytics',compare:'Compare',reports:'Reports',intelligence:'Data Intelligence',
+      workspace:'START HERE',home:'Home',advancedTools:'More tools',overview:'Dashboard',explorer:'Explore earthquakes',analytics:'Analytics',compare:'Compare',reports:'Reports',intelligence:'Data Intelligence',
       catalog:'USGS historical catalog',notPredictions:'Observed data, not earthquake forecasts.',source:'Data source',platform:'Platform',
       eyebrow:'GEOSPATIAL DATA SCIENCE',title:'Data Intelligence',intro:'Explore historical earthquake data, geographic clusters and activity benchmarks built with Python.',
       heroTitle:'From raw observations to explainable insights',heroText:'Every figure comes from USGS records. No synthetic events, predicted earthquakes or fabricated alerts.',
@@ -35,7 +35,7 @@
       longitude:'Longitude',latitude:'Latitude',count:'Count',week:'Week',date:'Date',
     },
     ar: {
-      workspace:'مساحة العمل',overview:'نظرة عامة',explorer:'استكشاف مباشر',analytics:'التحليلات',compare:'المقارنة',reports:'التقارير',intelligence:'ذكاء البيانات',
+      workspace:'ابدأ هنا',home:'الرئيسية',advancedTools:'المزيد من الأدوات',overview:'لوحة المعلومات',explorer:'استكشاف الزلازل',analytics:'التحليلات',compare:'المقارنة',reports:'التقارير',intelligence:'ذكاء البيانات',
       catalog:'السجل التاريخي من USGS',notPredictions:'بيانات مسجلة وليست توقعات زلازل.',source:'مصدر البيانات',platform:'المنصة',
       eyebrow:'علم البيانات الجغرافية',title:'ذكاء البيانات',intro:'استكشفي بيانات الزلازل التاريخية والتجمعات الجغرافية ومقارنات النشاط باستخدام Python.',
       heroTitle:'من البيانات الخام إلى نتائج قابلة للتفسير',heroText:'كل رقم مشتق من سجلات USGS الحقيقية، دون أحداث وهمية أو تنبؤات بوقوع زلازل أو تنبيهات مختلقة.',
