@@ -114,3 +114,62 @@ body[data-theme=light] .recent-place:hover{background:#eaf6f8}
   .globe-event-preview{bottom:145px;left:12px;right:12px;padding:10px}
   .globe-event-preview strong{font-size:11px}
 }
+
+
+/* TerraPulse Dashboard v1 — one glance, one clear action, no crowded analytics */
+.dash-filter-line{margin-bottom:20px}
+.dash-filter-line .toolbar{margin-bottom:8px;box-shadow:none}
+.dash-updated{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px;line-height:1.6}
+.dash-updated .ico{width:14px;height:14px;color:var(--cyan)}
+.dash-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 19px}
+.dash-kpi,.dash-highlight,.dash-globe-card,.dash-trend-card,.dash-events-card{background:var(--surface);border:1px solid var(--edge);border-radius:17px;box-shadow:var(--shadow)}
+.dash-kpi{padding:20px 21px;min-width:0;position:relative;overflow:hidden}
+.dash-kpi:after{content:"";position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--cyan);opacity:.85}
+.dash-kpi:nth-child(2):after{background:var(--warning)}.dash-kpi:nth-child(3):after{background:var(--purple)}
+.dash-kpi-label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;font-weight:700}
+.dash-kpi-label .ico{color:var(--cyan)}
+.dash-kpi strong{display:block;margin:13px 0 5px;font-size:clamp(26px,3vw,34px);font-weight:800;line-height:1.2;color:var(--text);font-variant-numeric:tabular-nums}
+.dash-kpi small{display:block;color:var(--muted);font-size:10px;line-height:1.6}
+.dash-layout{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:18px;align-items:stretch}
+.dash-primary{display:flex;flex-direction:column;gap:18px;min-width:0}
+.dash-highlight{padding:22px 24px}
+.dash-title h2{margin:0;color:var(--text);font-size:clamp(18px,1.75vw,22px);letter-spacing:-.45px;line-height:1.35}
+.dash-title p{font-size:12px;line-height:1.7;color:var(--muted);margin:7px 0 0}
+.dash-title .eyebrow{margin-bottom:7px}
+.dash-latest-content{display:flex;gap:17px;align-items:center;flex-wrap:wrap;margin-top:17px}
+.dash-latest-mag{background:color-mix(in srgb,var(--quake-color),transparent 89%);border:1px solid color-mix(in srgb,var(--quake-color),transparent 60%);color:var(--quake-color);width:84px;height:84px;border-radius:16px;display:flex;justify-content:center;align-items:center;flex-direction:column;flex-shrink:0}
+.dash-latest-mag small{font-size:10px;font-weight:600}.dash-latest-mag strong{font-size:32px;line-height:1.2;font-variant-numeric:tabular-nums}
+.dash-latest-copy{flex:1;min-width:130px;display:flex;flex-direction:column;gap:7px}
+.dash-latest-copy strong{font-size:14px;line-height:1.5;color:var(--text);overflow-wrap:anywhere}
+.dash-latest-copy span{font-size:11px;line-height:1.5;color:var(--muted)}
+.dash-latest-action{font-size:11px;white-space:nowrap;min-height:39px;touch-action:manipulation}
+.dash-primary>.recent-panel{margin:0;flex:1;padding:21px 23px;background:var(--surface)}
+.dash-primary .recent-panel-top{margin-bottom:15px}
+.dash-primary .recent-panel h2{font-size:20px}
+.dash-primary .recent-panel-top p{font-size:11px}
+.dash-primary .recent-places-list{grid-template-columns:1fr;gap:8px}
+.dash-primary .recent-place{padding:11px 10px}
+.dash-primary .recent-place-main strong{font-size:13px}
+.dash-primary .recent-place-main small{font-size:10px}
+.dash-primary .recent-count{font-size:12px}
+.dash-primary .recent-place .recent-mag{font-size:10px;padding:5px 6px}
+.dash-primary .recent-panel-foot{font-size:10px}
+.dash-globe-card{display:flex;flex-direction:column;min-height:600px;overflow:hidden;padding:22px 21px 16px;position:relative;background:radial-gradient(ellipse at 50% 45%,#11334a 0%,#0b1f32 53%,#071726 92%);border-color:#1c4355}
+.dash-globe-card .dash-title{z-index:2;position:relative}
+.dash-globe-card .dash-title h2{color:#f0fbff}
+.dash-globe-card .dash-title p{color:#a9ccdc}
+.dash-globe-space{position:relative;flex:1;min-height:385px;overflow:hidden;isolation:isolate;display:block}
+.dash-globe-space .hero-globe{position:absolute;inset:0!important;width:100%;height:100%;opacity:1!important;overflow:hidden;min-width:0;z-index:1}
+.dash-globe-space .globe-fallback{width:80%;top:10%;height:80%}
+.dash-globe-action{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:43px;border:1px solid #44758a;color:#e1faff;border-radius:11px;background:#123d50;position:relative;z-index:3;font-weight:800;font-size:12px;margin-top:5px;touch-action:manipulation;cursor:pointer}
+.dash-globe-action:hover,.dash-globe-action:focus-visible{background:#1a5364;border-color:#78dcd8}
+.dash-bottom-layout-placeholder{display:none}
+.dash-lower{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:18px;margin:20px 0 27px}
+.dash-trend-card,.dash-events-card{padding:22px;min-width:0}
+.dash-chart-space{height:250px;margin-top:12px;position:relative;min-width:0}
+.dash-chart-space canvas,.dash-chart-space svg{max-width:100%}
+.dash-events-list{margin-top:13px}
+.dash-events-list .event-row{min-height:49px}
+@media(max-width:1150px){.dash-layout{grid-template-columns:1fr}.dash-globe-card{min-height:400px}.dash-globe-space{min-height:355px}.dash-primary .recent-places-list{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-primary .recent-panel{flex:auto}}
+@media(max-width:800px){.dash-kpi{padding:17px}.dash-layout,.dash-lower{grid-template-columns:1fr}.dash-lower{margin-top:16px}.dash-primary .recent-places-list{grid-template-columns:1fr}.dash-globe-card{min-height:400px}.dash-globe-space{height:330px;min-height:330px;flex:initial}}
+@media(max-width:620px){.dash-kpis{gap:8px;margin-bottom:12px}.dash-kpi{padding:13px 10px;border-radius:12px}.dash-kpi-label{font-size:10px;gap:4px}.dash-kpi-label .ico{width:15px;height:15px}.dash-kpi strong{font-size:22px;margin:9px 0 5px}.dash-kpi small{font-size:9px}.dash-primary{gap:13px}.dash-highlight{padding:17px}.dash-latest-content{gap:12px}.dash-latest-mag{width:70px;height:70px;border-radius:13px}.dash-latest-mag strong{font-size:26px}.dash-latest-copy{min-width:118px}.dash-latest-action{width:100%;justify-content:center}.dash-primary>.recent-panel{padding:17px 14px}.dash-primary .recent-place{gap:8px}.dash-primary .recent-panel h2{font-size:18px}.dash-primary .recent-panel-top p{line-height:1.5}.dash-globe-card{padding:17px 14px 15px;min-height:365px}.dash-globe-space{height:275px;min-height:275px}.dash-globe-action{font-size:11px;min-height:41px}.dash-trend-card,.dash-events-card{padding:17px}.dash-chart-space{height:210px}.dash-lower{gap:13px}}
