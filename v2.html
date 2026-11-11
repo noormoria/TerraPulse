@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071523">
+  <meta name="description" content="TerraPulse 2.0 — explore recorded earthquake patterns and historical activity with real USGS data and interpretable geospatial analysis.">
+  <title>TerraPulse 2.0 · Earthquake Pattern Intelligence</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzYpAiwqO5a+3u7Y92F0ujs=" crossorigin="">
+  <link rel="stylesheet" href="v2.css?v=preview1">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <script src="v2.js?v=preview1" defer></script>
+</head>
+<body data-theme="dark">
+  <a class="skip-link" href="#explorer" data-i18n="skip">تخطي إلى الاستكشاف</a>
+  <header class="topnav">
+    <a href="#top" class="logo" aria-label="TerraPulse home">
+      <span class="logo-symbol"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M3 23h9l4-11 7 23 6-17 4 5h8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="logo-name">TerraPulse<span class="logo-mark">2.0</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a href="#explorer" data-i18n="navExplore">استكشف الأنماط</a>
+      <a href="#context" data-i18n="navContext">مقارنة النشاط</a>
+      <a href="#approach" data-i18n="navMethod">كيف نحلل؟</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="langToggle" type="button" class="outline-control" aria-label="Change language">EN</button>
+      <button id="themeToggle" type="button" class="icon-control" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.5 1.5m9.8 9.8 1.5 1.5m0-12.8-1.5 1.5m-9.8 9.8-1.5 1.5"/><circle cx="12" cy="12" r="4"/></svg>
+      </button>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero section-padding">
+      <div class="hero-content">
+        <div class="eyebrow"><span class="signal-dot"></span><span data-i18n="eyebrow">EARTHQUAKE PATTERN INTELLIGENCE</span></div>
+        <h1><span data-i18n="heroLine1">الزلازل ليست مجرد</span><span class="text-gradient" data-i18n="heroLine2">نقاط على خريطة.</span></h1>
+        <p class="hero-description" data-i18n="heroDesc">اكتشفي أنماط النشاط الزلزالي حول العالم، وميّزي بين التجمعات الجغرافية والتغيرات التاريخية — باستخدام سجلات حقيقية وتحليل قابل للتفسير.</p>
+        <div class="hero-buttons">
+          <a href="#explorer" class="btn-primary"><span data-i18n="heroPrimary">استكشفي الأنماط</span><span class="arrow-symbol" aria-hidden="true">↗</span></a>
+          <a href="#approach" class="btn-quiet" data-i18n="heroSecondary">كيف يعمل التحليل؟</a>
+        </div>
+        <div class="hero-credibility">
+          <span class="tiny-check" aria-hidden="true">✓</span>
+          <span data-i18n="heroSource">سجلات USGS الفعلية • بدون تنبؤات أو أحداث مصطنعة</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Earth science illustration">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <img class="hero-earth" src="assets/fallback-earth.svg" alt="" loading="eager">
+        <div class="floating-info floating-info-one">
+          <span data-i18n="heroDataLabel">سجلات تاريخية</span><strong id="heroTotal">—</strong><small data-i18n="heroEventUnit">زلزال بقوة 4.5+</small>
+        </div>
+        <div class="floating-info floating-info-two">
+          <span data-i18n="heroClusterLabel">تجمعات مكتشفة</span><strong id="heroClusters">—</strong><small>DBSCAN · Haversine</small>
+        </div>
+        <span class="visual-caption" data-i18n="heroVisualCaption">من بيانات جغرافية إلى قصة قابلة للفهم</span>
+      </div>
+    </section>
+    <section class="trust-strip" aria-label="Analysis principles">
+      <div><span class="trust-icon">◎</span><span data-i18n="value1">بيانات حقيقية من USGS</span></div>
+      <div><span class="trust-icon">◈</span><span data-i18n="value2">تجمعات جغرافية قابلة للتفسير</span></div>
+      <div><span class="trust-icon">⌁</span><span data-i18n="value3">مقارنة مع سجل تاريخي</span></div>
+    </section>
+    <section id="explorer" class="section-padding interactive-section">
+      <div class="section-heading">
+        <div><span class="section-kicker" data-i18n="sectionOneKicker">01 / EXPLORE THE PATTERNS</span>
+          <h2 data-i18n="exploreTitle">أين يتركز النشاط الزلزالي المسجل؟</h2>
+          <p data-i18n="exploreDesc">اضغطي على إحدى التجمعات لاكتشاف حجم النشاط وخصائصه. هذه مواقع أحداث تاريخية وليست توقعات مستقبلية.</p>
+        </div>
+        <div class="section-meta"><span data-i18n="basedOn">مبني على بيانات</span><strong data-i18n="m45">M 4.5+ · 365 يومًا</strong></div>
+      </div>
+      <div id="dataNotice" class="data-notice" role="status" aria-live="polite"><span class="loading-pulse"></span><span data-i18n="loading">جارٍ تحميل التحليل الحقيقي من USGS...</span></div>
+      <div class="stat-band">
+        <article><span data-i18n="statTotal">إجمالي الزلازل</span><strong id="statTotal">—</strong><small data-i18n="statTotalSub">خلال الفترة التاريخية</small></article>
+        <article><span data-i18n="statClusters">التجمعات المكتشفة</span><strong id="statClusters">—</strong><small>DBSCAN</small></article>
+        <article><span data-i18n="statPeak">أعلى قوة مسجلة</span><strong id="statPeak">—</strong><small data-i18n="magUnit">Magnitude</small></article>
+        <article><span data-i18n="statUpdated">تاريخ البيانات</span><strong id="statDate">—</strong><small data-i18n="statDateSub">آخر معالجة مكتملة (UTC)</small></article>
+      </div>
+      <div class="explore-grid">
+        <div class="map-panel">
+          <div class="panel-head">
+            <div><h3 data-i18n="mapTitle">خريطة تجمعات الزلازل</h3><p data-i18n="mapDesc">حددي أي دائرة لعرض تحليلها. حجم الدائرة يعكس عدد الأحداث في التجمع.</p></div>
+            <button id="resetMap" class="small-outline" type="button" data-i18n="resetView">العالم كله</button>
+          </div>
+          <div id="patternMap" class="pattern-map" role="application" aria-label="Map of historical earthquake clusters"></div>
+          <div id="mapFallback" class="map-fallback" hidden><span data-i18n="mapUnavailable">الخريطة غير متاحة حاليًا؛ تقدرين تختارين أي منطقة من القائمة.</span></div>
+          <div class="map-bottom"><span><i class="legend-point"></i><span data-i18n="legendText">تجمعات تاريخية من DBSCAN</span></span><span data-i18n="mapNotForecast">ليست خريطة خطر أو تنبؤ</span></div>
+        </div>
+        <aside class="inspector-panel" aria-label="Cluster detail and selection">
+          <div class="panel-head"><div><h3 data-i18n="selectionTitle">افهمي النمط</h3><p data-i18n="selectionSub">اختاري منطقة من الخريطة أو القائمة</p></div><span class="inspector-tag">PATTERN LENS</span></div>
+          <div id="clusterInsight" class="cluster-insight"><p class="empty-insight" data-i18n="choosePrompt">اختاري تجمعًا جغرافيًا لعرض الأرقام والتفسير هنا.</p></div>
+          <div class="list-head"><span data-i18n="topClusters">أبرز التجمعات المسجلة</span><span data-i18n="clusterCountNote">مرتبة حسب عدد الأحداث</span></div>
+          <div id="clusterList" class="cluster-list" aria-label="Select a cluster"><p class="list-loading" data-i18n="loadingShort">جارٍ التحميل...</p></div>
+        </aside>
+      </div>
+    </section>
+    <section id="context" class="section-padding context-section">
+      <div class="section-heading"><div><span class="section-kicker" data-i18n="sectionTwoKicker">02 / PUT THE NUMBERS IN CONTEXT</span><h2 data-i18n="contextTitle">هل النشاط الأخير مختلف عن المعتاد؟</h2><p data-i18n="contextDesc">نقارن عدد الأحداث العالمية المسجلة خلال 7 أيام مع التوزيع التاريخي للأسابيع السابقة. المقارنة وصفية وليست تحذيرًا.</p></div></div>
+      <div class="context-grid">
+        <div class="context-story">
+          <span class="story-overline" data-i18n="contextQuestion">السؤال: كيف يبدو الأسبوع الحالي أمام الأسابيع السابقة؟</span>
+          <div class="context-figure"><strong id="weeklyRecent">—</strong><span data-i18n="events7d">زلزال مسجل خلال آخر 7 أيام مكتملة</span></div>
+          <div id="contextStatus" class="context-status" data-i18n="waiting">جارٍ حساب المقارنة...</div>
+          <p id="contextExplanation" class="context-explanation" data-i18n="contextCaution">هذه المقارنة تصف النشاط المرصود عالميًا، ولا تعني توقع وقوع زلازل.</p>
+          <div class="baseline-rows">
+            <div><span data-i18n="medianLabel">الوسيط الأسبوعي التاريخي</span><strong id="weeklyMedian">—</strong></div>
+            <div><span data-i18n="p90Label">المئين التسعون للأسبوع</span><strong id="weeklyP90">—</strong></div>
+          </div>
+        </div>
+        <div class="trend-panel">
+          <div class="panel-head"><div><h3 data-i18n="trendTitle">النشاط خلال آخر 30 يومًا</h3><p data-i18n="trendDesc">عدد أحداث M4.5+ يوميًا من آخر سجل مكتمل</p></div><span class="mini-label">UTC</span></div>
+          <div id="trendChart" class="trend-chart" role="img" aria-label="Recorded earthquakes by day"></div>
+          <div class="trend-footer"><span data-i18n="trendStart">الأقدم</span><span data-i18n="trendEnd">الأحدث</span></div>
+        </div>
+      </div>
+    </section>
+    <section id="approach" class="section-padding approach-section">
+      <div class="approach-intro"><span class="section-kicker" data-i18n="sectionThreeKicker">03 / THE SCIENCE BEHIND THE STORY</span><h2 data-i18n="methodTitle">كيف تتحول البيانات إلى فهم؟</h2><p data-i18n="methodIntro">كل مؤشر قابل للتفسير والتحقق. لا نخلط بين تجمعات الزلازل التاريخية واحتمال حدوث زلزال مستقبلي.</p></div>
+      <div class="method-grid">
+        <article><span class="step-icon">01</span><h3 data-i18n="method1">جمع البيانات</h3><p data-i18n="method1Desc">سجلات أحداث الزلازل من USGS FDSN Earthquake Catalog بقوة 4.5 فأكثر.</p></article>
+        <article><span class="step-icon">02</span><h3 data-i18n="method2">تنظيف البيانات</h3><p data-i18n="method2Desc">فحص القيم المفقودة، المعرّفات المكررة، الإحداثيات والتواريخ.</p></article>
+        <article><span class="step-icon">03</span><h3 data-i18n="method3">اكتشاف التجمعات</h3><p data-i18n="method3Desc">DBSCAN مع مسافة Haversine للكشف عن التقارب الجغرافي للأحداث التاريخية.</p></article>
+        <article><span class="step-icon">04</span><h3 data-i18n="method4">وضعها في سياق</h3><p data-i18n="method4Desc">مقارنة نشاط آخر 7 أيام مع 52 أسبوعًا سابقًا، مع توضيح حدود الاستنتاج.</p></article>
+      </div>
+      <div class="method-footer">
+        <div><strong data-i18n="transparentTitle">البيانات قبل الادعاءات.</strong><p data-i18n="transparentDesc">يُحدّث التحليل آليًا عند نجاح معالجة السجلات. المصدر مستقل، والنتائج تعليمية وليست إنذارًا أو توقعًا.</p><span id="dataPeriod" class="data-period">—</span></div>
+        <div class="method-actions"><a class="btn-primary compact" href="data/earthquakes_historical.csv" download><span data-i18n="downloadCSV">تحميل Dataset · CSV</span><span aria-hidden="true">↧</span></a><a class="source-text-link" href="https://earthquake.usgs.gov/fdsnws/event/1/" target="_blank" rel="noopener noreferrer" data-i18n="sourceLink">مصدر البيانات: USGS</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><a href="#top" class="footer-brand">TerraPulse <small>2.0</small></a><p data-i18n="footerText">منصة مستقلة لتحليل سجلات الزلازل — ليست نظام تنبؤ أو إنذار.</p><span>© <span id="year"></span> TerraPulse</span></footer>
+</body>
+</html>
