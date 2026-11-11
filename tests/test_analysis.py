@@ -36,6 +36,15 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(weekly["baseline_weeks"], 52)
         self.assertTrue(weekly["above_baseline_p90"])
 
+    def test_summary_has_30_completed_utc_dates_not_the_exclusive_endpoint(self):
+        df = clean_features([feature(100, NOW-timedelta(days=1), 20, 30)], NOW)
+        report = summarize(df, NOW)
+        daily = report["daily_last_30d"]
+        self.assertEqual(len(daily), 30)
+        self.assertEqual(daily[0]["date"], (NOW-timedelta(days=30)).date().isoformat())
+        self.assertEqual(daily[-1]["date"], (NOW-timedelta(days=1)).date().isoformat())
+        self.assertEqual(sum(day["count"] for day in daily), 1)
+
     def test_summary_never_invents_missing_events(self):
         df = clean_features([feature(i, NOW-timedelta(days=i+1), 20, 30) for i in range(14)], NOW)
         report = summarize(df, NOW)
