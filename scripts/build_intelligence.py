@@ -123,7 +123,7 @@ def summarize(df: pd.DataFrame, as_of: datetime) -> dict:
     if period.empty:
         raise ValueError("No real USGS events in the requested period. Refusing to publish empty analytics.")
     recent = period[period.time >= as_of - timedelta(days=30)]
-    dates = pd.date_range(as_of - timedelta(days=29), periods=30, freq="D", tz="UTC")
+    dates = pd.date_range(as_of - timedelta(days=30), periods=30, freq="D", tz="UTC")
     daily_counts = recent.groupby(recent.time.dt.floor("D")).size().reindex(dates, fill_value=0)
     edges = [4.5, 5.0, 6.0, 7.0, float('inf')]
     bins = pd.cut(period.magnitude, bins=edges, right=False, labels=["4.5–4.9", "5.0–5.9", "6.0–6.9", "7.0+"])
