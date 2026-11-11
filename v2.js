@@ -128,7 +128,7 @@
   function renderNumbers(){
     const summary=report.summary;
     setText('statTotal',number(summary.total_events));setText('statClusters',number(report.spatial.cluster_count));
-    setText('statPeak',number(summary.max_magnitude,1));setText('statDate',dateStr(report.methodology.end_exclusive_utc+'T00:00:00Z'));
+    setText('statPeak',number(summary.max_magnitude,1));const end=new Date(report.methodology.end_exclusive_utc+'T00:00:00Z');setText('statDate',dateStr(new Date(end.getTime()-86400000)));
     setText('heroTotal',number(summary.total_events));setText('heroClusters',number(report.spatial.cluster_count));
     setText('dataPeriod',t('period')+': '+report.methodology.start_utc+' → '+report.methodology.end_exclusive_utc+' ('+t('until')+', UTC) · '+t('shownTop'));
   }
