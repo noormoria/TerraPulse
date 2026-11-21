@@ -1,12 +1,12 @@
 {
   "version": 1,
   "status": "ready",
-  "generated_at_utc": "2026-11-20T14:05:50.270218+00:00",
+  "generated_at_utc": "2026-11-21T13:31:37.895816+00:00",
   "source": "USGS FDSN Event Catalog",
   "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/query",
   "methodology": {
-    "start_utc": "2025-11-20",
-    "end_exclusive_utc": "2026-11-20",
+    "start_utc": "2025-11-21",
+    "end_exclusive_utc": "2026-11-21",
     "reference_window_days": 365,
     "baseline_weeks": 52,
     "min_magnitude": 4.5,
@@ -19,16 +19,12 @@
     "caveat": "Retrospective geographic clusters, not future earthquake locations or hazard assessments. Data can be revised by USGS."
   },
   "summary": {
-    "total_events": 7828,
+    "total_events": 7826,
     "mean_magnitude": 4.82,
     "max_magnitude": 7.8,
     "median_depth_km": 10.0
   },
   "daily_last_30d": [
-    {
-      "date": "2026-10-21",
-      "count": 27
-    },
     {
       "date": "2026-10-22",
       "count": 35
@@ -51,11 +47,11 @@
     },
     {
       "date": "2026-10-27",
-      "count": 25
+      "count": 29
     },
     {
       "date": "2026-10-28",
-      "count": 38
+      "count": 39
     },
     {
       "date": "2026-10-29",
@@ -67,7 +63,7 @@
     },
     {
       "date": "2026-10-31",
-      "count": 17
+      "count": 18
     },
     {
       "date": "2026-11-01",
@@ -99,7 +95,7 @@
     },
     {
       "date": "2026-11-08",
-      "count": 9
+      "count": 10
     },
     {
       "date": "2026-11-09",
@@ -131,7 +127,7 @@
     },
     {
       "date": "2026-11-16",
-      "count": 12
+      "count": 13
     },
     {
       "date": "2026-11-17",
@@ -143,7 +139,11 @@
     },
     {
       "date": "2026-11-19",
-      "count": 12
+      "count": 13
+    },
+    {
+      "date": "2026-11-20",
+      "count": 13
     }
   ],
   "magnitude_distribution": [
@@ -153,7 +153,7 @@
     },
     {
       "range": "5.0–5.9",
-      "count": 1874
+      "count": 1872
     },
     {
       "range": "6.0–6.9",
@@ -165,320 +165,320 @@
     }
   ],
   "weekly_baseline": {
-    "recent_7d": 108,
-    "baseline_median_7d": 133.0,
-    "baseline_p90_7d": 202.3,
+    "recent_7d": 99,
+    "baseline_median_7d": 139.0,
+    "baseline_p90_7d": 205.4,
     "baseline_weeks": 52,
     "above_baseline_p90": false,
     "weekly_series": [
       {
-        "week_start": "2025-11-14",
-        "count": 114
-      },
-      {
-        "week_start": "2025-11-21",
-        "count": 121
-      },
-      {
-        "week_start": "2025-11-28",
+        "week_start": "2025-11-15",
         "count": 112
       },
       {
-        "week_start": "2025-12-05",
-        "count": 155
+        "week_start": "2025-11-22",
+        "count": 126
       },
       {
-        "week_start": "2025-12-12",
-        "count": 122
+        "week_start": "2025-11-29",
+        "count": 112
       },
       {
-        "week_start": "2025-12-19",
-        "count": 132
-      },
-      {
-        "week_start": "2025-12-26",
-        "count": 113
-      },
-      {
-        "week_start": "2026-01-02",
-        "count": 116
-      },
-      {
-        "week_start": "2026-01-09",
-        "count": 129
-      },
-      {
-        "week_start": "2026-01-16",
-        "count": 153
-      },
-      {
-        "week_start": "2026-01-23",
-        "count": 156
-      },
-      {
-        "week_start": "2026-01-30",
-        "count": 109
-      },
-      {
-        "week_start": "2026-02-06",
-        "count": 114
-      },
-      {
-        "week_start": "2026-02-13",
-        "count": 147
-      },
-      {
-        "week_start": "2026-02-20",
-        "count": 120
-      },
-      {
-        "week_start": "2026-02-27",
-        "count": 134
-      },
-      {
-        "week_start": "2026-03-06",
-        "count": 158
-      },
-      {
-        "week_start": "2026-03-13",
-        "count": 127
-      },
-      {
-        "week_start": "2026-03-20",
-        "count": 157
-      },
-      {
-        "week_start": "2026-03-27",
-        "count": 194
-      },
-      {
-        "week_start": "2026-04-03",
-        "count": 169
-      },
-      {
-        "week_start": "2026-04-10",
-        "count": 109
-      },
-      {
-        "week_start": "2026-04-17",
-        "count": 181
-      },
-      {
-        "week_start": "2026-04-24",
-        "count": 113
-      },
-      {
-        "week_start": "2026-05-01",
-        "count": 116
-      },
-      {
-        "week_start": "2026-05-08",
-        "count": 119
-      },
-      {
-        "week_start": "2026-05-15",
-        "count": 106
-      },
-      {
-        "week_start": "2026-05-22",
-        "count": 124
-      },
-      {
-        "week_start": "2026-05-29",
-        "count": 119
-      },
-      {
-        "week_start": "2026-06-05",
-        "count": 238
-      },
-      {
-        "week_start": "2026-06-12",
-        "count": 162
-      },
-      {
-        "week_start": "2026-06-19",
-        "count": 148
-      },
-      {
-        "week_start": "2026-06-26",
-        "count": 131
-      },
-      {
-        "week_start": "2026-07-03",
-        "count": 159
-      },
-      {
-        "week_start": "2026-07-10",
+        "week_start": "2025-12-06",
         "count": 160
       },
       {
-        "week_start": "2026-07-17",
-        "count": 225
+        "week_start": "2025-12-13",
+        "count": 118
       },
       {
-        "week_start": "2026-07-24",
-        "count": 196
+        "week_start": "2025-12-20",
+        "count": 135
       },
       {
-        "week_start": "2026-07-31",
-        "count": 164
+        "week_start": "2025-12-27",
+        "count": 105
       },
       {
-        "week_start": "2026-08-07",
-        "count": 127
+        "week_start": "2026-01-03",
+        "count": 121
       },
       {
-        "week_start": "2026-08-14",
-        "count": 268
+        "week_start": "2026-01-10",
+        "count": 139
       },
       {
-        "week_start": "2026-08-21",
-        "count": 176
+        "week_start": "2026-01-17",
+        "count": 135
       },
       {
-        "week_start": "2026-08-28",
-        "count": 157
+        "week_start": "2026-01-24",
+        "count": 162
       },
       {
-        "week_start": "2026-09-04",
-        "count": 120
+        "week_start": "2026-01-31",
+        "count": 110
       },
       {
-        "week_start": "2026-09-11",
-        "count": 128
+        "week_start": "2026-02-07",
+        "count": 123
       },
       {
-        "week_start": "2026-09-18",
-        "count": 130
+        "week_start": "2026-02-14",
+        "count": 138
       },
       {
-        "week_start": "2026-09-25",
-        "count": 203
+        "week_start": "2026-02-21",
+        "count": 124
       },
       {
-        "week_start": "2026-10-02",
-        "count": 157
+        "week_start": "2026-02-28",
+        "count": 141
       },
       {
-        "week_start": "2026-10-09",
-        "count": 246
+        "week_start": "2026-03-07",
+        "count": 145
       },
       {
-        "week_start": "2026-10-16",
-        "count": 182
+        "week_start": "2026-03-14",
+        "count": 139
       },
       {
-        "week_start": "2026-10-23",
-        "count": 271
+        "week_start": "2026-03-21",
+        "count": 144
       },
       {
-        "week_start": "2026-10-30",
-        "count": 114
+        "week_start": "2026-03-28",
+        "count": 215
       },
       {
-        "week_start": "2026-11-06",
+        "week_start": "2026-04-04",
+        "count": 155
+      },
+      {
+        "week_start": "2026-04-11",
+        "count": 104
+      },
+      {
+        "week_start": "2026-04-18",
+        "count": 185
+      },
+      {
+        "week_start": "2026-04-25",
         "count": 109
       },
       {
-        "week_start": "2026-11-13",
+        "week_start": "2026-05-02",
+        "count": 126
+      },
+      {
+        "week_start": "2026-05-09",
+        "count": 102
+      },
+      {
+        "week_start": "2026-05-16",
+        "count": 118
+      },
+      {
+        "week_start": "2026-05-23",
+        "count": 120
+      },
+      {
+        "week_start": "2026-05-30",
+        "count": 122
+      },
+      {
+        "week_start": "2026-06-06",
+        "count": 241
+      },
+      {
+        "week_start": "2026-06-13",
+        "count": 166
+      },
+      {
+        "week_start": "2026-06-20",
+        "count": 142
+      },
+      {
+        "week_start": "2026-06-27",
+        "count": 139
+      },
+      {
+        "week_start": "2026-07-04",
+        "count": 148
+      },
+      {
+        "week_start": "2026-07-11",
+        "count": 206
+      },
+      {
+        "week_start": "2026-07-18",
+        "count": 190
+      },
+      {
+        "week_start": "2026-07-25",
+        "count": 192
+      },
+      {
+        "week_start": "2026-08-01",
+        "count": 154
+      },
+      {
+        "week_start": "2026-08-08",
+        "count": 151
+      },
+      {
+        "week_start": "2026-08-15",
+        "count": 262
+      },
+      {
+        "week_start": "2026-08-22",
+        "count": 168
+      },
+      {
+        "week_start": "2026-08-29",
+        "count": 148
+      },
+      {
+        "week_start": "2026-09-05",
+        "count": 117
+      },
+      {
+        "week_start": "2026-09-12",
+        "count": 135
+      },
+      {
+        "week_start": "2026-09-19",
+        "count": 136
+      },
+      {
+        "week_start": "2026-09-26",
+        "count": 214
+      },
+      {
+        "week_start": "2026-10-03",
+        "count": 200
+      },
+      {
+        "week_start": "2026-10-10",
+        "count": 184
+      },
+      {
+        "week_start": "2026-10-17",
+        "count": 186
+      },
+      {
+        "week_start": "2026-10-24",
+        "count": 270
+      },
+      {
+        "week_start": "2026-10-31",
         "count": 108
+      },
+      {
+        "week_start": "2026-11-07",
+        "count": 125
+      },
+      {
+        "week_start": "2026-11-14",
+        "count": 99
       }
     ]
   },
   "spatial": {
     "hotspots": [
       {
-        "id": 0,
-        "count": 1613,
-        "latitude": 2.775,
-        "longitude": 124.668,
+        "id": 8,
+        "count": 1608,
+        "latitude": 2.773,
+        "longitude": 124.673,
         "mean_magnitude": 4.79,
         "max_magnitude": 7.8,
-        "mean_depth_km": 48.5,
+        "mean_depth_km": 48.3,
         "example_place": "Banda Sea"
       },
       {
-        "id": 5,
-        "count": 951,
-        "latitude": 42.554,
-        "longitude": 149.857,
+        "id": 4,
+        "count": 948,
+        "latitude": 42.524,
+        "longitude": 149.824,
         "mean_magnitude": 4.82,
         "max_magnitude": 7.6,
-        "mean_depth_km": 53.1,
+        "mean_depth_km": 53.2,
         "example_place": "Izu Islands, Japan region"
       },
       {
-        "id": 1,
-        "count": 939,
-        "latitude": -24.311,
-        "longitude": -177.294,
+        "id": 5,
+        "count": 938,
+        "latitude": -24.298,
+        "longitude": -177.289,
         "mean_magnitude": 4.8,
         "max_magnitude": 7.5,
         "mean_depth_km": 175.0,
         "example_place": "south of the Fiji Islands"
       },
       {
-        "id": 9,
-        "count": 679,
-        "latitude": -16.199,
-        "longitude": 166.841,
+        "id": 2,
+        "count": 684,
+        "latitude": -16.235,
+        "longitude": 166.86,
         "mean_magnitude": 4.83,
         "max_magnitude": 7.3,
-        "mean_depth_km": 35.6,
+        "mean_depth_km": 35.5,
         "example_place": "southeast of the Loyalty Islands"
       },
       {
-        "id": 14,
-        "count": 372,
-        "latitude": -4.872,
-        "longitude": 148.269,
+        "id": 3,
+        "count": 373,
+        "latitude": -4.873,
+        "longitude": 148.261,
         "mean_magnitude": 4.8,
         "max_magnitude": 6.5,
-        "mean_depth_km": 59.2,
+        "mean_depth_km": 59.3,
         "example_place": "185 km W of Abepura, Indonesia"
       },
       {
-        "id": 3,
-        "count": 370,
-        "latitude": 10.989,
-        "longitude": -87.464,
+        "id": 7,
+        "count": 368,
+        "latitude": 10.976,
+        "longitude": -87.451,
         "mean_magnitude": 4.82,
         "max_magnitude": 7.7,
-        "mean_depth_km": 29.1,
+        "mean_depth_km": 28.6,
         "example_place": "off the coast of Central America"
       },
       {
-        "id": 6,
+        "id": 9,
         "count": 203,
-        "latitude": -57.246,
-        "longitude": -26.695,
+        "latitude": -57.239,
+        "longitude": -26.703,
         "mean_magnitude": 4.82,
         "max_magnitude": 6.4,
-        "mean_depth_km": 53.0,
+        "mean_depth_km": 52.5,
         "example_place": "South Sandwich Islands region"
       },
       {
-        "id": 11,
+        "id": 1,
         "count": 168,
-        "latitude": -3.147,
-        "longitude": 102.414,
+        "latitude": -3.285,
+        "longitude": 102.626,
         "mean_magnitude": 4.83,
         "max_magnitude": 6.9,
-        "mean_depth_km": 50.7,
+        "mean_depth_km": 51.2,
         "example_place": "193 km S of Bengkulu, Indonesia"
       },
       {
-        "id": 13,
-        "count": 140,
-        "latitude": -21.996,
-        "longitude": -68.193,
+        "id": 0,
+        "count": 141,
+        "latitude": -21.955,
+        "longitude": -68.216,
         "mean_magnitude": 4.71,
         "max_magnitude": 6.9,
-        "mean_depth_km": 133.4,
+        "mean_depth_km": 133.3,
         "example_place": "43 km NW of San Antonio de los Cobres, Argentina"
       },
       {
-        "id": 16,
+        "id": 12,
         "count": 140,
         "latitude": 52.249,
         "longitude": -173.814,
@@ -488,7 +488,7 @@
         "example_place": "Rat Islands, Aleutian Islands, Alaska"
       },
       {
-        "id": 20,
+        "id": 16,
         "count": 88,
         "latitude": 29.547,
         "longitude": 130.201,
@@ -498,17 +498,17 @@
         "example_place": "78 km ESE of Taira, Japan"
       },
       {
-        "id": 10,
-        "count": 82,
-        "latitude": -30.49,
-        "longitude": -70.334,
+        "id": 38,
+        "count": 83,
+        "latitude": -30.508,
+        "longitude": -70.359,
         "mean_magnitude": 4.79,
         "max_magnitude": 6.2,
-        "mean_depth_km": 59.3,
+        "mean_depth_km": 58.7,
         "example_place": "101 km NW of Coquimbo, Chile"
       }
     ],
-    "noise_count": 710,
-    "cluster_count": 102
+    "noise_count": 718,
+    "cluster_count": 101
   }
 }
